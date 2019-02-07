@@ -21,4 +21,31 @@ public class OneArmedBanditTest {
                 .isEqualTo(initialCredits.subtract(OneArmedBandit.REGULAR_GAME_PRICE));
     }
 
+    /**
+     * Test to win a game.
+     */
+    @Test
+    public void shouldWinAGame() {
+        //given
+        final Credit initialCredits = new Credit(10);
+        OneArmedBandit cut = new OneArmedBandit(new Player("Player One"), initialCredits);
+        //when
+        GameResult gameResult = cut.pullingHandel();
+        //then
+        assertThat(gameResult.isGameWon()).isTrue();
+    }
+
+    /**
+     * Test to lose a game when different wheels states arise from the game.
+     */
+    @Test
+    public void shouldLoseAGame() {
+        //given
+        final Credit initialCredits = new Credit(10);
+        OneArmedBandit cut = new OneArmedBandit(new Player("Player One"), initialCredits);
+        //when
+        GameResult gameResult = cut.pullingHandel();
+        //then
+        assertThat(gameResult.isGameWon()).isFalse();
+    }
 }

@@ -8,6 +8,10 @@ public class GameResult {
         this.credit = remainCredits;
     }
 
+    public boolean isGameWon() {
+        return true;
+    }
+
     public Credit getCreditsRemained() {
         return credit;
     }
