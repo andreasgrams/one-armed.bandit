@@ -2,6 +2,8 @@ package de.holisticon.bewerber.grams.one.armed.bandit;
 
 import org.junit.jupiter.api.Test;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 public class OneArmedBanditTest {
 
     @Test
@@ -11,9 +13,7 @@ public class OneArmedBanditTest {
         //when
         GameResult gameResult = cut.pullingHandel();
         //then
-        boolean won = gameResult.isGameWon();
-        Credit score = gameResult.getScore();
-        Wheel[] wheels = gameResult.getWheelState();
+        assertThat(gameResult).isNotNull();
     }
 
 }
