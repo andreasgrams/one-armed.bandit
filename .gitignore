@@ -9,6 +9,7 @@
 .idea/**/*.xml
 .idea/**/dictionaries
 .idea/**/shelf
+*.iml
 
 # Sensitive or high-churn files
 .idea/**/dataSources/
