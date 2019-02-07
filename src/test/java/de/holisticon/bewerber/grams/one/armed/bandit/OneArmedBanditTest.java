@@ -6,14 +6,19 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class OneArmedBanditTest {
 
+    /**
+     * Test to start a regular priced game. Expected the remaining credits minimized by 3 credits.
+     */
     @Test
-    public void shouldStartAGame() {
+    public void shouldStartARegularPricedGame() {
         //given
-        OneArmedBandit cut = new OneArmedBandit(new Player("Player One"), new Credit(10));
+        final Credit initialCredits = new Credit(10);
+        OneArmedBandit cut = new OneArmedBandit(new Player("Player One"), initialCredits);
         //when
         GameResult gameResult = cut.pullingHandel();
         //then
-        assertThat(gameResult).isNotNull();
+        assertThat(gameResult.getCreditsRemained())
+                .isEqualTo(initialCredits.subtract(OneArmedBandit.REGULAR_GAME_PRICE));
     }
 
 }
