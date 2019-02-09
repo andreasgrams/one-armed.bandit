@@ -1,6 +1,6 @@
 package de.holisticon.bewerber.grams.one.armed.bandit;
 
-import java.util.Random;
+import java.util.*;
 import java.util.function.IntSupplier;
 
 public class OneArmedBandit {
@@ -18,10 +18,16 @@ public class OneArmedBandit {
     public GameResult pullingHandel() {
         this.creditState = creditState.subtract(REGULAR_GAME_PRICE);
         final GameResult gameResult = new GameResult(this.creditState);
-        for (int i = 0; i < Wheel.values().length; i++) {
-            gameResult.addWheel(Wheel.valueByIndex(banditStrategy.getAsInt()));
-        }
+        final Collection<Wheel> result = determineWheelStates(this.banditStrategy);
         return gameResult;
+    }
+
+    private Collection<Wheel> determineWheelStates(final IntSupplier banditStrategy) {
+        List<Wheel> result = new ArrayList<>();
+        for (int i = 0; i < Wheel.values().length; i++) {
+            result.add(Wheel.valueByIndex(banditStrategy.getAsInt()));
+        }
+        return Collections.unmodifiableCollection(result);
     }
 
     void setBanditStrategy(IntSupplier banditStrategy) {

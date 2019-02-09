@@ -8,7 +8,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class OneArmedBanditTest {
 
-    public static final IntSupplier WIN_STRATEGY = () -> 1;
+    public static final IntSupplier WIN_STRATEGY_APPLE = () -> 0;
 
     public static final IntSupplier LOSE_STRATEGY = new IntSupplier() {
         int state;
@@ -34,7 +34,7 @@ public class OneArmedBanditTest {
     }
 
     /**
-     * Test to win a game with the injected bandit strategy 'WIN_STRATEGY'. The strategy returns each time the same wheel state.
+     * Test to win a game with the injected bandit strategy 'WIN_STRATEGY_APPLE'. The strategy returns each time the same apple state.
      *
      * Expected the game is won and the credits minimized by 3 credits.
      */
@@ -43,11 +43,15 @@ public class OneArmedBanditTest {
         //given
         final Credit initialCredits = new Credit(10);
         OneArmedBandit cut = new OneArmedBandit(new Player("Player One"), initialCredits);
-        cut.setBanditStrategy(WIN_STRATEGY);
+        cut.setBanditStrategy(WIN_STRATEGY_APPLE);
         //when
         GameResult gameResult = cut.pullingHandel();
         //then
         assertThat(gameResult.isGameWon()).isTrue();
+        assertThat(gameResult.getCreditsRemained())
+                .isEqualTo(initialCredits
+                        .subtract(OneArmedBandit.REGULAR_GAME_PRICE)
+                        .addition(Wheel.APPLE.getBenefitAsCredit()));
     }
 
     /**

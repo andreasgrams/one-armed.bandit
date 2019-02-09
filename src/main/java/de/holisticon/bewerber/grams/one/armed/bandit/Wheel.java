@@ -1,26 +1,41 @@
 package de.holisticon.bewerber.grams.one.armed.bandit;
 
 public enum Wheel {
-    A(10), B(20), C(30);
+    APPLE(10),
+    B(20),
+    C(30);
 
-    private final int credis;
+    private final int benefit;
 
-    Wheel(int credits) {
-        this.credis = credits;
-    }
-
-    public int getCredit() {
-        return credis;
+    /**
+     * Defined a wheel state with benefit.
+     *
+     * @param benefit The benefit for player when the game is won.
+     */
+    Wheel(int benefit) {
+        this.benefit = benefit;
     }
 
     /**
-     * Return the item from index. The index started by 0.
-     *
-     * @param index
-     * @return
+     * @param index started by 0.
+     * @return the item on index
      * @throws IndexOutOfBoundsException when index outside existing items.
      */
     public static Wheel valueByIndex(int index) {
         return values()[index];
+    }
+
+    /**
+     * @return the defined benefit of wheel state.
+     */
+    public int getBenefit() {
+        return benefit;
+    }
+
+    /**
+     * @return the defined benefit of wheel state as Credit.
+     */
+    public Credit getBenefitAsCredit() {
+        return new Credit(benefit);
     }
 }
