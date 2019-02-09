@@ -6,6 +6,10 @@ public class Credit {
 
     private int value;
 
+    public Credit(Credit credit) {
+        this.value = credit.getValue();
+    }
+
     public Credit(final int credits) {
         this.value = credits;
     }
@@ -38,7 +42,7 @@ public class Credit {
                 '}';
     }
 
-    public int getValue() {
+    private int getValue() {
         return value;
     }
 }

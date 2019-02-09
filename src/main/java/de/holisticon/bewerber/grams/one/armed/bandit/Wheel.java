@@ -2,8 +2,8 @@ package de.holisticon.bewerber.grams.one.armed.bandit;
 
 public enum Wheel {
     APPLE(10),
-    B(20),
-    C(30);
+    BANANA(20),
+    CLEMENTINE(30);
 
     private final int benefit;
 

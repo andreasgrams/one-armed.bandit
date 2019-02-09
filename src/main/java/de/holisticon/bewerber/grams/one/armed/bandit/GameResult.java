@@ -1,24 +1,26 @@
 package de.holisticon.bewerber.grams.one.armed.bandit;
 
-import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class GameResult {
 
     private Credit credit;
     private List<Wheel> wheels;
+    private boolean won;
 
-    GameResult(Credit remainCredits) {
-        this.credit = remainCredits;
-        this.wheels = new ArrayList<>(Wheel.values().length);
+    GameResult(Credit remainCredits, List<Wheel> wheels, boolean isGameWon) {
+        this.credit = new Credit(remainCredits);
+        this.wheels = Collections.unmodifiableList(wheels);
+        this.won = isGameWon;
     }
 
-    public void addWheel(final Wheel wheel) {
-        wheels.add(wheel);
+    public List<Wheel> getWheels() {
+        return wheels;
     }
 
     public boolean isGameWon() {
-        return wheels.get(0).equals(wheels.get(1)) && wheels.get(1).equals(wheels.get(2));
+        return won;
     }
 
     public Credit getCreditsRemained() {
