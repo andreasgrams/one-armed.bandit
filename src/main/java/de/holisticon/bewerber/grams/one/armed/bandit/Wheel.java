@@ -2,8 +2,8 @@ package de.holisticon.bewerber.grams.one.armed.bandit;
 
 public enum Wheel {
     APPLE(10),
-    BANANA(20),
-    CLEMENTINE(30);
+    BANANA(15),
+    CLEMENTINE(20);
 
     private final int benefit;
 
@@ -25,12 +25,6 @@ public enum Wheel {
         return values()[index];
     }
 
-    /**
-     * @return the defined benefit of wheel state.
-     */
-    public int getBenefit() {
-        return benefit;
-    }
 
     /**
      * @return the defined benefit of wheel state as Credit.
