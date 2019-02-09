@@ -77,6 +77,9 @@ public class OneArmedBanditTest {
                         .addition(Wheel.APPLE.getBenefitAsCredit()));
     }
 
+    /**
+     * Check the game only started when enough credits exists. Expected a CreditException is thrown.
+     */
     @Test
     public void shouldNotStartAGameWhenCreditsNotEnough() {
         //given
@@ -90,6 +93,15 @@ public class OneArmedBanditTest {
         }
     }
 
-
+    @Test
+    public void shouldIncreaseCredits() {
+        //given
+        OneArmedBandit cut = new OneArmedBandit(new Player("Player One"), NOT_ENOUGH_CREDITS_TO_PLAY);
+        //when
+        Credit remainingCredits = cut.increaseCredits(CREDITS_TO_PLAY);
+        //then
+        assertThat(new Credit(12)).isEqualTo(remainingCredits);
+        assertThat(cut.getCredits()).isEqualTo(remainingCredits);
+    }
 
 }

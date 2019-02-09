@@ -31,6 +31,24 @@ public class OneArmedBandit {
     }
 
     /**
+     * Increase the given credits
+     *
+     * @param credit increased by value
+     * @return the given creditState
+     */
+    public Credit increaseCredits(final Credit credit) {
+        this.creditState = this.creditState.addition(credit);
+        return this.creditState;
+    }
+
+    /**
+     * @return the given creditState
+     */
+    public Credit getCredits() {
+        return new Credit(this.creditState);
+    }
+
+    /**
      * Determine the game is won by comparing the wheels.
      *
      * @param wheelsToCompare
