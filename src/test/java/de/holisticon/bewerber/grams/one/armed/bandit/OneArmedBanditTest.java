@@ -34,7 +34,7 @@ public class OneArmedBanditTest {
     @Test
     public void shouldLoseAGame() {
         //given
-        OneArmedBandit cut = new OneArmedBandit(new Player("Player One"), CREDITS_TO_PLAY);
+        OneArmedBandit cut = new OneArmedBandit(CREDITS_TO_PLAY);
         cut.setBanditStrategy(LOSE_STRATEGY);
         //when
         GameResult gameResult = cut.pullingHandel();
@@ -49,7 +49,7 @@ public class OneArmedBanditTest {
     @Test
     public void shouldStartARegularGame() {
         //given
-        OneArmedBandit cut = new OneArmedBandit(new Player("Player One"), CREDITS_TO_PLAY);
+        OneArmedBandit cut = new OneArmedBandit(CREDITS_TO_PLAY);
         //when
         GameResult gameResult = cut.pullingHandel();
         //then
@@ -65,7 +65,7 @@ public class OneArmedBanditTest {
     @Test
     public void shouldWinAGame() {
         //given
-        OneArmedBandit cut = new OneArmedBandit(new Player("Player One"), CREDITS_TO_PLAY);
+        OneArmedBandit cut = new OneArmedBandit(CREDITS_TO_PLAY);
         cut.setBanditStrategy(WIN_STRATEGY_WITH_APPLE_STATE);
         //when
         GameResult gameResult = cut.pullingHandel();
@@ -83,7 +83,7 @@ public class OneArmedBanditTest {
     @Test
     public void shouldNotStartAGameWhenCreditsNotEnough() {
         //given
-        OneArmedBandit cut = new OneArmedBandit(new Player("Player One"), NOT_ENOUGH_CREDITS_TO_PLAY);
+        OneArmedBandit cut = new OneArmedBandit(NOT_ENOUGH_CREDITS_TO_PLAY);
         //when
         try {
             cut.pullingHandel();
@@ -93,10 +93,13 @@ public class OneArmedBanditTest {
         }
     }
 
+    /**
+     *
+     */
     @Test
     public void shouldIncreaseCredits() {
         //given
-        OneArmedBandit cut = new OneArmedBandit(new Player("Player One"), NOT_ENOUGH_CREDITS_TO_PLAY);
+        OneArmedBandit cut = new OneArmedBandit(NOT_ENOUGH_CREDITS_TO_PLAY);
         //when
         Credit remainingCredits = cut.increaseCredits(CREDITS_TO_PLAY);
         //then

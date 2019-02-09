@@ -10,7 +10,7 @@ public class OneArmedBandit {
     private Credit creditState;
     private IntSupplier banditStrategy;
 
-    public OneArmedBandit(final Player player, final Credit credit) {
+    public OneArmedBandit(final Credit credit) {
         this.creditState = new Credit(credit);
         this.banditStrategy = () -> new Random().nextInt(Wheel.values().length);
     }
