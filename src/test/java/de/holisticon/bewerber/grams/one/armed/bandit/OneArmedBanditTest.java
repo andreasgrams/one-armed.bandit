@@ -12,7 +12,6 @@ public class OneArmedBanditTest {
 
     public static final IntSupplier LOSE_STRATEGY = new IntSupplier() {
         int state;
-
         @Override
         public int getAsInt() {
             return state++;
@@ -35,14 +34,16 @@ public class OneArmedBanditTest {
     }
 
     /**
-     * Test to win a game.
+     * Test to win a game with the injected bandit strategy 'WIN_STRATEGY'. The strategy returns each time the same wheel state.
+     *
+     * Expected the game is won and the credits minimized by 3 credits.
      */
     @Test
     public void shouldWinAGame() {
         //given
         final Credit initialCredits = new Credit(10);
         OneArmedBandit cut = new OneArmedBandit(new Player("Player One"), initialCredits);
-        cut.setLuckStrategy(WIN_STRATEGY);
+        cut.setBanditStrategy(WIN_STRATEGY);
         //when
         GameResult gameResult = cut.pullingHandel();
         //then
@@ -57,10 +58,11 @@ public class OneArmedBanditTest {
         //given
         final Credit initialCredits = new Credit(10);
         OneArmedBandit cut = new OneArmedBandit(new Player("Player One"), initialCredits);
-        cut.setLuckStrategy(LOSE_STRATEGY);
+        cut.setBanditStrategy(LOSE_STRATEGY);
         //when
         GameResult gameResult = cut.pullingHandel();
         //then
         assertThat(gameResult.isGameWon()).isFalse();
     }
+
 }
