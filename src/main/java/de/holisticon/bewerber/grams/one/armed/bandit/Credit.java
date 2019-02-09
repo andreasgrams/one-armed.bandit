@@ -6,16 +6,46 @@ public class Credit {
 
     private int value;
 
+    /**
+     * Construct a positive Credit when the given value is negative, CreditException is thrown.
+     *
+     * @param credit
+     * @throws CreditException When the given value is negative
+     */
     public Credit(Credit credit) {
-        this.value = credit.getValue();
+        this(credit.getValue());
     }
 
-    public Credit(final int credits) {
-        this.value = credits;
+    /**
+     * Construct a positive Credit when the given value is negative, CreditException is thrown.
+     *
+     * @param value
+     * @throws CreditException When the given value is negative
+     */
+    public Credit(final int value) {
+        this.value = value;
+        if(isNegative()) {
+            throw new CreditException(String.format("The credits must be a positive value. Given value: %d", value));
+        }
     }
 
-    public Credit subtract(final Credit regularGamePrice) {
-        return new Credit(value - regularGamePrice.getValue());
+    /**
+     * Subtract the given credits. If the credit value is negative a CreditException is thrown.
+     *
+     * @param creditsToSubtract
+     * @return the credit result
+     * @throws CreditException
+     */
+    public Credit subtract(final Credit creditsToSubtract) {
+        try {
+            return new Credit(value - creditsToSubtract.getValue());
+        } catch (CreditException e) {
+            throw new CreditException(String.format(
+                    "Not enough credits to play. One game costs %d credits. Remaining credits: %d",
+                    OneArmedBandit.REGULAR_GAME_PRICE.getValue(), value));
+        }
+
+
     }
 
     public Credit addition(final Credit credit) {
@@ -40,6 +70,10 @@ public class Credit {
         return "Credit{" +
                 "value=" + value +
                 '}';
+    }
+
+    private boolean isNegative() {
+        return this.value < 0;
     }
 
     private int getValue() {

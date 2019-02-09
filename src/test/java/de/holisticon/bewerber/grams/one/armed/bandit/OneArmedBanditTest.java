@@ -24,6 +24,8 @@ public class OneArmedBanditTest {
         }
     };
 
+    public static final Credit NOT_ENOUGH_CREDITS_TO_PLAY = new Credit(OneArmedBandit.REGULAR_GAME_PRICE).subtract(new Credit(1));
+
     /**
      * Test to lose a game when different wheels states arise from the game.
      */
@@ -63,6 +65,7 @@ public class OneArmedBanditTest {
     @Test
     public void shouldWinAGame() {
         //given
+        //TODO extract as const value
         final Credit initialCredits = new Credit(10);
         OneArmedBandit cut = new OneArmedBandit(new Player("Player One"), initialCredits);
         cut.setBanditStrategy(WIN_STRATEGY_WITH_APPLE_STATE);
@@ -75,5 +78,20 @@ public class OneArmedBanditTest {
                         .subtract(OneArmedBandit.REGULAR_GAME_PRICE)
                         .addition(Wheel.APPLE.getBenefitAsCredit()));
     }
+
+    @Test
+    public void shouldNotStartAGameWhenCreditsNotEnough() {
+        //given
+        OneArmedBandit cut = new OneArmedBandit(new Player("Player One"), NOT_ENOUGH_CREDITS_TO_PLAY);
+        //when
+        try {
+            cut.pullingHandel();
+            //then
+        } catch (CreditException e) {
+            assertThat(e).hasMessageContaining("Not enough credits to play. One game costs 3 credits.");
+        }
+    }
+
+
 
 }
