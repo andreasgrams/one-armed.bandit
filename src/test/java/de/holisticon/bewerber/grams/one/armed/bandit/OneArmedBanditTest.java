@@ -26,14 +26,15 @@ public class OneArmedBanditTest {
 
     public static final Credit NOT_ENOUGH_CREDITS_TO_PLAY = new Credit(OneArmedBandit.REGULAR_GAME_PRICE).subtract(new Credit(1));
 
+    public static final Credit CREDITS_TO_PLAY = new Credit(10);
+
     /**
      * Test to lose a game when different wheels states arise from the game.
      */
     @Test
     public void shouldLoseAGame() {
         //given
-        final Credit initialCredits = new Credit(10);
-        OneArmedBandit cut = new OneArmedBandit(new Player("Player One"), initialCredits);
+        OneArmedBandit cut = new OneArmedBandit(new Player("Player One"), CREDITS_TO_PLAY);
         cut.setBanditStrategy(LOSE_STRATEGY);
         //when
         GameResult gameResult = cut.pullingHandel();
@@ -48,8 +49,7 @@ public class OneArmedBanditTest {
     @Test
     public void shouldStartARegularGame() {
         //given
-        final Credit initialCredits = new Credit(10);
-        OneArmedBandit cut = new OneArmedBandit(new Player("Player One"), initialCredits);
+        OneArmedBandit cut = new OneArmedBandit(new Player("Player One"), CREDITS_TO_PLAY);
         //when
         GameResult gameResult = cut.pullingHandel();
         //then
@@ -65,16 +65,14 @@ public class OneArmedBanditTest {
     @Test
     public void shouldWinAGame() {
         //given
-        //TODO extract as const value
-        final Credit initialCredits = new Credit(10);
-        OneArmedBandit cut = new OneArmedBandit(new Player("Player One"), initialCredits);
+        OneArmedBandit cut = new OneArmedBandit(new Player("Player One"), CREDITS_TO_PLAY);
         cut.setBanditStrategy(WIN_STRATEGY_WITH_APPLE_STATE);
         //when
         GameResult gameResult = cut.pullingHandel();
         //then
         assertThat(gameResult.isGameWon()).isTrue();
         assertThat(gameResult.getCreditsRemained())
-                .isEqualTo(initialCredits
+                .isEqualTo(CREDITS_TO_PLAY
                         .subtract(OneArmedBandit.REGULAR_GAME_PRICE)
                         .addition(Wheel.APPLE.getBenefitAsCredit()));
     }
