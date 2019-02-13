@@ -11,12 +11,6 @@ public class GameResultPojo {
     public GameResultPojo() {
     }
 
-    public GameResultPojo(final CreditPojo credit, final List<String> wheels, final boolean won) {
-        this.credit = credit;
-        this.wheels = wheels;
-        this.won = won;
-    }
-
     public CreditPojo getCredit() {
         return credit;
     }

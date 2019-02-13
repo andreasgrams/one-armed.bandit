@@ -44,7 +44,7 @@ public class GameResult {
     }
 
     /**
-     * Returns the reaming credits after the game round.
+     * Returns the remaining credits after the game round.
      *
      * @return remaining credits
      */

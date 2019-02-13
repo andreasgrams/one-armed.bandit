@@ -47,7 +47,7 @@ class OneArmedBanditServiceImplTest {
     }
 
     /**
-     * Test to get the reaming credits.
+     * Test to get the remaining credits.
      */
     @Test
     void shouldCheckoutRemainingCredits() {

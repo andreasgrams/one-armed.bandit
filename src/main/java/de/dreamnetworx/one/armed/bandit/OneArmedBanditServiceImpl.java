@@ -30,9 +30,9 @@ public class OneArmedBanditServiceImpl implements OneArmedBanditService {
 
     @Override
     public Credit checkout() {
-        final Credit reamingCredits = oneArmedBandit.getCredits();
+        final Credit remainingCredits = oneArmedBandit.getCredits();
         this.oneArmedBandit = null;
-        return reamingCredits;
+        return remainingCredits;
     }
 
     @Override

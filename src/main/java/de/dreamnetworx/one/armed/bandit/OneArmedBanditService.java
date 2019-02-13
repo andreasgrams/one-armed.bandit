@@ -22,16 +22,16 @@ public interface OneArmedBanditService {
     GameResult pullingHandle();
 
     /**
-     * Leave the game with the one armed bandit. The reaming credits returned as benefit.
+     * Leave the game. The remaining credits returned as benefit.
      *
-     * @return reaming credits
+     * @return remaining credits
      */
     Credit checkout();
 
     /**
-     * Return the reaming credits.
+     * Return the remaining credits.
      *
-     * @return reaming credits
+     * @return remaining credits
      */
     Credit getCredits();
 }
