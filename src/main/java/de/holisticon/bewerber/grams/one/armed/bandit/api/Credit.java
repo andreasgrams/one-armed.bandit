@@ -4,6 +4,13 @@ public class Credit {
 
     private int value;
 
+    public Credit(final int value) {
+        this.value = value;
+    }
+
+    public Credit() {
+    }
+
     public int getValue() {
         return value;
     }
@@ -11,4 +18,5 @@ public class Credit {
     public void setValue(final int value) {
         this.value = value;
     }
+
 }

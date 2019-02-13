@@ -5,6 +5,14 @@ public class Checkin {
     private String player;
     private Credit credit;
 
+    public Checkin() {
+    }
+
+    public Checkin(final String player, final Credit credit) {
+        this.player = player;
+        this.credit = credit;
+    }
+
     public String getPlayer() {
         return player;
     }
@@ -20,4 +28,5 @@ public class Checkin {
     public void setCredit(final Credit credit) {
         this.credit = credit;
     }
+
 }

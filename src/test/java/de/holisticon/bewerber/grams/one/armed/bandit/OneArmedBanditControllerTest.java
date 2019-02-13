@@ -20,6 +20,9 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @WebMvcTest(value = OneArmedBanditController.class)
 class OneArmedBanditControllerTest {
 
+    public static final String CHECKIN_AS_PLAYER_WITH_10_CREDITS =
+            new Gson().toJson(new Checkin("player a", new Credit(10)));
+
     @Autowired
     private MockMvc mockMvc;
 
@@ -27,24 +30,38 @@ class OneArmedBanditControllerTest {
      * Test to start a game as 'player a' with 10 credits. Expected the checkin process
      * accept with http status accepted(202).
      *
-     * @throws Exception
+     * @throws Exception unexpected test exceptions by perform http request
      */
     @Test
     public void shouldCheckin() throws Exception {
         //given
-        Checkin checkin = new Checkin();
-        checkin.setPlayer("player a");
-        final Credit credit = new Credit();
-        credit.setValue(10);
-        checkin.setCredit(credit);
         //when
-        final String content = new Gson().toJson(checkin);
         mockMvc.perform(
                 post("/oneArmedBandit/checkin")
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content(content))
+                        .content(CHECKIN_AS_PLAYER_WITH_10_CREDITS))
                 //then
                 .andExpect(status().isAccepted());
     }
 
+    /**
+     * Test play the first round by pulling the handle.
+     *
+     * @throws Exception unexpected test exceptions by perform http request
+     */
+    @Test
+    public void shouldPullingTheHandle() throws Exception {
+        //given
+        //TODO improve by mock internal state
+        post("/oneArmedBandit/checkin")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(CHECKIN_AS_PLAYER_WITH_10_CREDITS);
+        //when
+        mockMvc.perform(
+                post("/oneArmedBandit/pullingHandle")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(CHECKIN_AS_PLAYER_WITH_10_CREDITS))
+                //then
+                .andExpect(status().isAccepted());
+    }
 }
