@@ -1,8 +1,8 @@
-package de.holisticon.bewerber.grams.one.armed.bandit;
+package de.dreamnetworx.one.armed.bandit;
 
 import com.google.gson.Gson;
-import de.holisticon.bewerber.grams.one.armed.bandit.api.CheckinPojo;
-import de.holisticon.bewerber.grams.one.armed.bandit.api.CreditPojo;
+import de.dreamnetworx.one.armed.bandit.api.CheckinPojo;
+import de.dreamnetworx.one.armed.bandit.api.CreditPojo;
 import org.assertj.core.util.Lists;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

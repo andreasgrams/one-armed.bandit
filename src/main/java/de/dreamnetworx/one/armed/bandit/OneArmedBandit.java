@@ -1,4 +1,4 @@
-package de.holisticon.bewerber.grams.one.armed.bandit;
+package de.dreamnetworx.one.armed.bandit;
 
 import java.util.*;
 import java.util.function.IntSupplier;
@@ -13,7 +13,7 @@ public class OneArmedBandit {
     /**
      * Initialized the one armed bandit with the given credits.
      *
-     * @param credit
+     * @param credit credits to play with
      */
     public OneArmedBandit(final Credit credit) {
         this.creditState = new Credit(credit);
@@ -24,9 +24,9 @@ public class OneArmedBandit {
      * Start the game by pulling the handel.
      *
      * @return Returns the game result after pulling the handle.
-     * @throws throws a creditException when not enough credits available for this game.
+     * @throws throws a CreditException when not enough credits available for this game.
      */
-    public GameResult pullingHandel() {
+    public GameResult pullingHandel() throws CreditException {
         this.creditState = creditState.subtract(REGULAR_GAME_PRICE);
         final List<Wheel> result = getRandomWheelStates(this.banditStrategy);
         final boolean isGameWon = isGameWon(result);

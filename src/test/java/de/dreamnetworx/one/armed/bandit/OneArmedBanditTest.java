@@ -1,4 +1,4 @@
-package de.holisticon.bewerber.grams.one.armed.bandit;
+package de.dreamnetworx.one.armed.bandit;
 
 import org.junit.jupiter.api.Test;
 
@@ -9,11 +9,11 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class OneArmedBanditTest {
 
     /**
-     * Injectable Bandit strategy to win every game
+     * Injectable Bandit strategy to win each game
      */
     public static final IntSupplier WIN_STRATEGY_WITH_APPLE_STATE = () -> 0;
     /**
-     * Injectable Bandit strategy to lose every game
+     * Injectable Bandit strategy to lose each game
      */
     public static final IntSupplier LOSE_STRATEGY = new IntSupplier() {
         int state;
@@ -43,7 +43,7 @@ public class OneArmedBanditTest {
     }
 
     /**
-     * Test to start a regular game with the default bandit strategy. The game can be won or lose. Expected after
+     * Test to start a regular game with the default bandit strategy. The game result is not interested. Expected after
      * pulling the handle a GameResult returned with any values.
      */
     @Test
@@ -58,7 +58,8 @@ public class OneArmedBanditTest {
     }
 
     /**
-     * Test to win a game with the injected bandit strategy 'WIN_STRATEGY_WITH_APPLE_STATE'. The strategy returns each time the same apple state.
+     * Test to win a game with the injected bandit strategy 'WIN_STRATEGY_WITH_APPLE_STATE'. The strategy returns
+     * each time the same apple state.
      * <p>
      * Expected the game is won and the credits minimized by 3 credits.
      */

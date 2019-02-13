@@ -1,4 +1,4 @@
-package de.holisticon.bewerber.grams.one.armed.bandit;
+package de.dreamnetworx.one.armed.bandit;
 
 import org.junit.jupiter.api.Test;
 

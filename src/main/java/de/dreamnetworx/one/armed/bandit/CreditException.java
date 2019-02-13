@@ -1,4 +1,4 @@
-package de.holisticon.bewerber.grams.one.armed.bandit;
+package de.dreamnetworx.one.armed.bandit;
 
 public class CreditException extends OneArmedBanditException {
 

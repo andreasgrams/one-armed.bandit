@@ -1,4 +1,4 @@
-package de.holisticon.bewerber.grams.one.armed.bandit.api;
+package de.dreamnetworx.one.armed.bandit.api;
 
 import java.util.List;
 
