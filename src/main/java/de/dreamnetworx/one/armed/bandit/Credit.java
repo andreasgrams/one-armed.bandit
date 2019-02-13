@@ -45,7 +45,6 @@ public class Credit {
                     OneArmedBandit.REGULAR_GAME_PRICE.getValue(), value));
         }
 
-
     }
 
     /**
@@ -56,6 +55,17 @@ public class Credit {
      */
     public Credit addition(final Credit credit) {
         return new Credit(value + credit.getValue());
+    }
+
+    private boolean isNegative() {
+        return this.value < 0;
+    }
+
+    /**
+     * @return the credits
+     */
+    public int getValue() {
+        return value;
     }
 
     @Override
@@ -76,13 +86,5 @@ public class Credit {
         return "Credit{" +
                 "value=" + value +
                 '}';
-    }
-
-    private boolean isNegative() {
-        return this.value < 0;
-    }
-
-    public int getValue() {
-        return value;
     }
 }

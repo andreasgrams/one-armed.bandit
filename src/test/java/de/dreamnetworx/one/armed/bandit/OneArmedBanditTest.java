@@ -75,7 +75,7 @@ public class OneArmedBanditTest {
         assertThat(gameResult.getCreditsRemained())
                 .isEqualTo(CREDITS_TO_PLAY
                         .subtract(OneArmedBandit.REGULAR_GAME_PRICE)
-                        .addition(Wheel.APPLE.getBenefitAsCredit()));
+                        .addition(Wheel.APPLE.getProfitAsCredit()));
     }
 
     /**

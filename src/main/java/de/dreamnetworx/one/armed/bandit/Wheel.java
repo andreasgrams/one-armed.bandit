@@ -5,15 +5,15 @@ public enum Wheel {
     BANANA(15),
     CLEMENTINE(20);
 
-    private final int benefit;
+    private final int profit;
 
     /**
-     * Defined a wheel state with benefit.
+     * Defined a wheel state with amount of profit.
      *
-     * @param benefit The benefit for player when the game is won.
+     * @param profit The profit for player when the game is won.
      */
-    Wheel(int benefit) {
-        this.benefit = benefit;
+    Wheel(int profit) {
+        this.profit = profit;
     }
 
     /**
@@ -27,9 +27,9 @@ public enum Wheel {
 
 
     /**
-     * @return the defined benefit of wheel state as Credit.
+     * @return the defined profit of wheel state as {@link Credit}.
      */
-    public Credit getBenefitAsCredit() {
-        return new Credit(benefit);
+    public Credit getProfitAsCredit() {
+        return new Credit(profit);
     }
 }

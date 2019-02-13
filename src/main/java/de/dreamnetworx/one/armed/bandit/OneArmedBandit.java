@@ -31,7 +31,7 @@ public class OneArmedBandit {
         final List<Wheel> result = getRandomWheelStates(this.banditStrategy);
         final boolean isGameWon = isGameWon(result);
         if(isGameWon) {
-            this.creditState = creditState.addition(result.get(0).getBenefitAsCredit());
+            this.creditState = creditState.addition(result.get(0).getProfitAsCredit());
         }
         return new GameResult(this.creditState, result, isGameWon);
     }

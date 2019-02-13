@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.context.annotation.RequestScope;
 
+import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
@@ -44,13 +45,17 @@ public class OneArmedBanditController {
     }
 
     private GameResultPojo toPojo(GameResult gameResult) {
-        GameResultPojo result = new GameResultPojo();
+        final GameResultPojo result = new GameResultPojo();
         result.setCredit(toPojo(gameResult.getCreditsRemained()));
-        result.setWheels(gameResult.getWheels().stream()
-                .map(w -> w.name())
-                .collect(Collectors.toList()));
+        result.setWheels(getWheelNames(gameResult.getWheels()));
         result.setWon(gameResult.isGameWon());
         return result;
+    }
+
+    private List<String> getWheelNames(final List<Wheel> wheels) {
+        return wheels.stream()
+                .map(w -> w.name())
+                .collect(Collectors.toList());
     }
 
     private Credit toValueObject(final CheckinPojo checkin) {
