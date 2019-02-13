@@ -2,21 +2,21 @@ package de.holisticon.bewerber.grams.one.armed.bandit.api;
 
 public class CreditPojo {
 
-    private int value;
+    private int credits;
 
-    public CreditPojo(final int value) {
-        this.value = value;
+    public CreditPojo(final int credits) {
+        this.credits = credits;
     }
 
     public CreditPojo() {
     }
 
-    public int getValue() {
-        return value;
+    public int getCredits() {
+        return credits;
     }
 
-    public void setValue(final int value) {
-        this.value = value;
+    public void setCredits(final int credits) {
+        this.credits = credits;
     }
 
 }

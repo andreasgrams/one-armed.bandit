@@ -24,6 +24,7 @@ public class OneArmedBandit {
      * Start the game by pulling the handel.
      *
      * @return Returns the game result after pulling the handle.
+     * @throws throws a creditException when not enough credits available for this game.
      */
     public GameResult pullingHandel() {
         this.creditState = creditState.subtract(REGULAR_GAME_PRICE);

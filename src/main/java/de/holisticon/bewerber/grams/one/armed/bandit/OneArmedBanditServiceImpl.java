@@ -3,8 +3,6 @@ package de.holisticon.bewerber.grams.one.armed.bandit;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import javax.annotation.PostConstruct;
-
 
 public class OneArmedBanditServiceImpl implements OneArmedBanditService {
 
@@ -24,8 +22,13 @@ public class OneArmedBanditServiceImpl implements OneArmedBanditService {
         return this.oneArmedBandit.pullingHandel();
     }
 
-    @PostConstruct
-    public void lifecycle() {
-        log.info("PostConstruct OneArmedBanditServiceImpl " + this);
+    /**
+     * Leave the game with the one armed bandit. The reaming credits return as benefit.
+     *
+     * @return reaming credits
+     */
+    @Override
+    public Credit checkout() {
+        return null;
     }
 }

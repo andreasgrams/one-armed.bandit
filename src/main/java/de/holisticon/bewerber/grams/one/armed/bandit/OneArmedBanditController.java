@@ -26,22 +26,38 @@ public class OneArmedBanditController {
     @PostMapping(value = "checkin")
     public ResponseEntity<Void> checkin(@RequestBody CheckinPojo checkin) {
         log.info("ID this " + this + " service " + oneArmedBanditService);
-        oneArmedBanditService.checkin(new Credit(checkin.getCredit().getValue()));
+        oneArmedBanditService.checkin(toValueObject(checkin));
         return new ResponseEntity<>(HttpStatus.ACCEPTED);
     }
 
     @GetMapping(value = "pullingHandle")
     public ResponseEntity<GameResultPojo> pullingHandle() {
         final GameResult gameResult = oneArmedBanditService.pullingHandle();
-        return new ResponseEntity<>(convert(gameResult), HttpStatus.OK);
+        return new ResponseEntity<>(toPojo(gameResult), HttpStatus.OK);
     }
 
-    private GameResultPojo convert(GameResult gameResult) {
+    @GetMapping(value = "checkout")
+    public ResponseEntity<CreditPojo> checkout() {
+        final Credit remainingCredits = oneArmedBanditService.checkout();
+        return new ResponseEntity<>(toPojo(remainingCredits), HttpStatus.OK);
+    }
+
+    private CreditPojo toPojo(final Credit remainingCredits) {
+        return new CreditPojo(remainingCredits.getValue());
+    }
+
+    private GameResultPojo toPojo(GameResult gameResult) {
         GameResultPojo result = new GameResultPojo();
-        result.setCredit(new CreditPojo(gameResult.getCreditsRemained().getValue()));
-        result.setWheels(gameResult.getWheels().stream().map(w -> w.name()).collect(Collectors.toList()));
+        result.setCredit(toPojo(gameResult.getCreditsRemained()));
+        result.setWheels(gameResult.getWheels().stream()
+                .map(w -> w.name())
+                .collect(Collectors.toList()));
         result.setWon(gameResult.isGameWon());
         return result;
+    }
+
+    private Credit toValueObject(final CheckinPojo checkin) {
+        return new Credit(checkin.getCredit().getCredits());
     }
 
 }

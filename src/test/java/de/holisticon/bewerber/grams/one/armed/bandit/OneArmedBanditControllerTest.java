@@ -82,7 +82,23 @@ class OneArmedBanditControllerTest {
                 get("/oneArmedBandit/pullingHandle"))
                 //then
                 .andDo(result -> assertThat(result.getResponse().getContentAsString())
-                        .contains("{\"credit\":{\"value\":7},\"wheels\":[\"APPLE\",\"BANANA\",\"CLEMENTINE\"],\"won\":false}"))
+                        .contains("{\"credit\":{\"credits\":7},\"wheels\":[\"APPLE\",\"BANANA\",\"CLEMENTINE\"],\"won\":false}"))
+                .andExpect(status().isOk());
+    }
+
+    /**
+     * Test to leave the game. Excepted the remaining credits get back.
+     */
+    @Test
+    public void shouldLeaveTheGame() throws Exception {
+        //given
+        when(service.checkout()).thenReturn(new Credit(42));
+        //when
+        mockMvc.perform(
+                get("/oneArmedBandit/checkout"))
+                //then
+                .andDo(result -> assertThat(result.getResponse().getContentAsString())
+                        .contains("{\"credits\":42}"))
                 .andExpect(status().isOk());
     }
 }

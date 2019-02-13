@@ -13,9 +13,18 @@ public interface OneArmedBanditService {
     void checkin(Credit credit);
 
     /**
-     * Challenge your luck
+     * Challenge your luck.
+     *
+     * Works like {@link OneArmedBandit#pullingHandel()}
      */
     GameResult pullingHandle();
+
+    /**
+     * Leave the game with the one armed bandit. The reaming credits return as benefit.
+     *
+     * @return reaming credits
+     */
+    Credit checkout();
 
 
 }
