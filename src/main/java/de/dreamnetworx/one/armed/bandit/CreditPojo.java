@@ -1,4 +1,4 @@
-package de.dreamnetworx.one.armed.bandit.api;
+package de.dreamnetworx.one.armed.bandit;
 
 public class CreditPojo {
 

@@ -1,8 +1,5 @@
 package de.dreamnetworx.one.armed.bandit;
 
-import de.dreamnetworx.one.armed.bandit.api.CheckinPojo;
-import de.dreamnetworx.one.armed.bandit.api.CreditPojo;
-import de.dreamnetworx.one.armed.bandit.api.GameResultPojo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
