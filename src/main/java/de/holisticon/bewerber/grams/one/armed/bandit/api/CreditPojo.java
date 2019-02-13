@@ -19,4 +19,8 @@ public class CreditPojo {
         this.credits = credits;
     }
 
+    @Override
+    public String toString() {
+        return "credits=" + credits;
+    }
 }

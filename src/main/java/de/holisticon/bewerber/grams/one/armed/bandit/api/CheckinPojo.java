@@ -29,4 +29,8 @@ public class CheckinPojo {
         this.credit = credit;
     }
 
+    @Override
+    public String toString() {
+        return "Checkin as player='" + player + '\'' + " with credit=" + credit;
+    }
 }

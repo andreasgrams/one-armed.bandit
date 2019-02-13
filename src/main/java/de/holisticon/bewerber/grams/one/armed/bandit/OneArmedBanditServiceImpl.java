@@ -3,32 +3,43 @@ package de.holisticon.bewerber.grams.one.armed.bandit;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-
 public class OneArmedBanditServiceImpl implements OneArmedBanditService {
 
+    private Logger log = LoggerFactory.getLogger(OneArmedBanditServiceImpl.class);
     private OneArmedBandit oneArmedBandit;
-
-    Logger log = LoggerFactory.getLogger(OneArmedBanditServiceImpl.class);
 
     @Override
     public void checkin(final Credit credit) {
-        this.oneArmedBandit = new OneArmedBandit(credit);
-        log.info("checkin with credits: " + credit + " this " + this);
+        if(oneArmedBandit == null) {
+            log.info("new one armed bandit session started with initial credits {}.", credit.getValue());
+            this.oneArmedBandit = new OneArmedBandit(credit);
+        } else {
+            log.info("existing one armed bandit session increased by {} credits.", credit.getValue());
+            this.oneArmedBandit.increaseCredits(credit);
+        }
     }
 
     @Override
     public GameResult pullingHandle() {
-        log.info("pullingHandle::  credits: " + oneArmedBandit.getCredits() + " this " + this);
+        if(this.oneArmedBandit == null) {
+            throw new OneArmedBanditException("Do check in before pulling the handle");
+        }
+        log.info("try to pulling handling to challenge player luck.");
         return this.oneArmedBandit.pullingHandel();
     }
 
-    /**
-     * Leave the game with the one armed bandit. The reaming credits return as benefit.
-     *
-     * @return reaming credits
-     */
     @Override
     public Credit checkout() {
-        return null;
+        final Credit reamingCredits = oneArmedBandit.getCredits();
+        this.oneArmedBandit = null;
+        return reamingCredits;
+    }
+
+    @Override
+    public Credit getCredits() {
+        if(this.oneArmedBandit == null) {
+            return new Credit(0);
+        }
+        return this.oneArmedBandit.getCredits();
     }
 }

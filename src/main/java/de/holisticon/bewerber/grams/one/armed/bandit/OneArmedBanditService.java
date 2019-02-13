@@ -16,15 +16,22 @@ public interface OneArmedBanditService {
      * Challenge your luck.
      *
      * Works like {@link OneArmedBandit#pullingHandel()}
+     *
+     * @throws OneArmedBanditException when player not checked in
      */
     GameResult pullingHandle();
 
     /**
-     * Leave the game with the one armed bandit. The reaming credits return as benefit.
+     * Leave the game with the one armed bandit. The reaming credits returned as benefit.
      *
      * @return reaming credits
      */
     Credit checkout();
 
-
+    /**
+     * Return the reaming credits.
+     *
+     * @return reaming credits
+     */
+    Credit getCredits();
 }
