@@ -82,7 +82,7 @@ public class Credit {
         return this.value < 0;
     }
 
-    private int getValue() {
+    public int getValue() {
         return value;
     }
 }

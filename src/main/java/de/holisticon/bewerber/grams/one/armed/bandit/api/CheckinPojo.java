@@ -1,14 +1,14 @@
 package de.holisticon.bewerber.grams.one.armed.bandit.api;
 
-public class Checkin {
+public class CheckinPojo {
 
     private String player;
-    private Credit credit;
+    private CreditPojo credit;
 
-    public Checkin() {
+    public CheckinPojo() {
     }
 
-    public Checkin(final String player, final Credit credit) {
+    public CheckinPojo(final String player, final CreditPojo credit) {
         this.player = player;
         this.credit = credit;
     }
@@ -21,11 +21,11 @@ public class Checkin {
         this.player = player;
     }
 
-    public Credit getCredit() {
+    public CreditPojo getCredit() {
         return credit;
     }
 
-    public void setCredit(final Credit credit) {
+    public void setCredit(final CreditPojo credit) {
         this.credit = credit;
     }
 
