@@ -1,0 +1,75 @@
+{
+  "info": {
+    "_postman_id": "a3f1d819-4ccb-46a0-80dc-e40b1eaec0ba",
+    "name": "one.armed.bandit",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "check in",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "name": "Content-Type",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\"player\":\"player a\",\n\t\"credit\":\n\t\t{\"value\":10}\n}"
+        },
+        "url": {
+          "raw": "{{server}}/oneArmedBandit/checkin",
+          "host": [
+            "{{server}}"
+          ],
+          "path": [
+            "oneArmedBandit",
+            "checkin"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "pullingHandle",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": ""
+        },
+        "url": {
+          "raw": "{{server}}/oneArmedBandit/pullingHandle",
+          "host": [
+            "{{server}}"
+          ],
+          "path": [
+            "oneArmedBandit",
+            "pullingHandle"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "checkout",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": ""
+        },
+        "url": {
+          "raw": ""
+        }
+      },
+      "response": []
+    }
+  ]
+}
