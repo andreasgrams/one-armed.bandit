@@ -43,6 +43,8 @@ class OneArmedBanditControllerTest {
                 post("/oneArmedBandit/checkin")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(content))
+                //then
                 .andExpect(status().isAccepted());
     }
+
 }

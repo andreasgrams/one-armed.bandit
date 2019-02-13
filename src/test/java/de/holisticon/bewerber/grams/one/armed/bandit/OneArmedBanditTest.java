@@ -44,7 +44,7 @@ public class OneArmedBanditTest {
 
     /**
      * Test to start a regular game with the default bandit strategy. The game can be won or lose. Expected after
-     * pulling the handle a GameResult returned whatever values contains.
+     * pulling the handle a GameResult returned with any values.
      */
     @Test
     public void shouldStartARegularGame() {
@@ -94,7 +94,7 @@ public class OneArmedBanditTest {
     }
 
     /**
-     *
+     * Test to increase the given credit count.
      */
     @Test
     public void shouldIncreaseCredits() {

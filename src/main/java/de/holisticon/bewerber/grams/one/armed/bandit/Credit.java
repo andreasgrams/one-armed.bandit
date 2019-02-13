@@ -48,6 +48,12 @@ public class Credit {
 
     }
 
+    /**
+     * Added the given credit value
+     *
+     * @param credit
+     * @return
+     */
     public Credit addition(final Credit credit) {
         return new Credit(value + credit.getValue());
     }

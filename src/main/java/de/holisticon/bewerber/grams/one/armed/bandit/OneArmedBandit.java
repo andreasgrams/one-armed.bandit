@@ -10,15 +10,20 @@ public class OneArmedBandit {
     private Credit creditState;
     private IntSupplier banditStrategy;
 
+    /**
+     * Initialized the one armed bandit with the given credits.
+     *
+     * @param credit
+     */
     public OneArmedBandit(final Credit credit) {
         this.creditState = new Credit(credit);
         this.banditStrategy = () -> new Random().nextInt(Wheel.values().length);
     }
 
     /**
-     * Start the game  by pulling the handel.
+     * Start the game by pulling the handel.
      *
-     * @return
+     * @return Returns the game result after pulling the handle.
      */
     public GameResult pullingHandel() {
         this.creditState = creditState.subtract(REGULAR_GAME_PRICE);
@@ -52,7 +57,7 @@ public class OneArmedBandit {
      * Determine the game is won by comparing the wheels.
      *
      * @param wheelsToCompare
-     * @return
+     * @return is game won
      */
     private boolean isGameWon(final Collection<Wheel> wheelsToCompare) {
         return new HashSet<>(wheelsToCompare).size() == 1;
@@ -71,8 +76,7 @@ public class OneArmedBandit {
     }
 
     /**
-     * Inject the banditStrategy
-     *
+     * The bandit strategy is used for selecting the wheel state. The given index must between 0 - {@link Wheel}.length.
      * @param banditStrategy
      */
     void setBanditStrategy(IntSupplier banditStrategy) {
