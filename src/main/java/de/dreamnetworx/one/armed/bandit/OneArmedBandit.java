@@ -2,6 +2,7 @@ package de.dreamnetworx.one.armed.bandit;
 
 import java.util.*;
 import java.util.function.IntSupplier;
+import java.util.stream.Stream;
 
 public class OneArmedBandit {
 
@@ -66,14 +67,23 @@ public class OneArmedBandit {
 
     /**
      * @param banditStrategy
-     * @return Returns a list of wheels. They selected randomized by invoking the banditStrategy.
+     * @return Returns a list of randomized wheels.
      */
     private List<Wheel> getRandomWheelStates(final IntSupplier banditStrategy) {
         List<Wheel> result = new ArrayList<>();
-        for (int i = 0; i < Wheel.values().length; i++) {
-            result.add(Wheel.valueByIndex(banditStrategy.getAsInt()));
-        }
+        Stream.of(Wheel.values())
+                .forEach(c -> result.add(getWheel(banditStrategy)));
         return result;
+    }
+
+    /**
+     * Select Wheel randomized by invoking the banditStrategy.
+     *
+     * @param banditStrategy
+     * @return
+     */
+    private Wheel getWheel(final IntSupplier banditStrategy) {
+        return Wheel.valueByIndex(banditStrategy.getAsInt());
     }
 
     /**
