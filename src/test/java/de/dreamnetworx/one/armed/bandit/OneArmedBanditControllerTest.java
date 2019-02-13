@@ -103,16 +103,6 @@ class OneArmedBanditControllerTest {
                 .andExpect(status().isOk());
     }
 
-    @Test
-    public void shouldTranslateExceptionOnCheckin() throws Exception {
-        //given
-        doThrow(new OneArmedBanditException("")).when(service).checkin(any(Credit.class));
-        //when
-        mockMvc.perform(
-                post(URL_CHECKIN))
-                //then
-                .andExpect(status().isBadRequest());
-    }
 
     @Test
     public void shouldTranslateExceptionOnPullingHandle() throws Exception {

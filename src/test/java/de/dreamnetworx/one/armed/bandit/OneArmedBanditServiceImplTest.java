@@ -59,4 +59,16 @@ class OneArmedBanditServiceImplTest {
         assertThat(result.getValue()).isEqualTo(42);
     }
 
+    /**
+     *
+     */
+    @Test
+    void shouldNotFailToInvokeCheckoutWithoutBanditSession() {
+        //given
+        //when
+        final Credit result = service.checkout();
+        //then
+        assertThat(result).isEqualTo(new Credit(0));
+    }
+
 }
