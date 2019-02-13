@@ -1,9 +1,9 @@
 package de.holisticon.bewerber.grams.one.armed.bandit;
 
-public class CreditException extends IllegalStateException {
+public class CreditException extends OneArmedBanditException {
 
     /**
-     * Constructs an IllegalStateException with the specified detail
+     * Constructs an CreditException with the specified detail
      * message.  A detail message is a String that describes this particular
      * exception.
      *

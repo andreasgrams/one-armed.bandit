@@ -25,9 +25,9 @@ public class OneArmedBanditController {
 
     @PostMapping(value = "checkin")
     public ResponseEntity<Void> checkin(@RequestBody CheckinPojo checkin) {
-        log.info("ID this " + this + " service " + oneArmedBanditService);
+        log.info("checkin {} ", checkin);
         oneArmedBanditService.checkin(toValueObject(checkin));
-        return new ResponseEntity<>(HttpStatus.ACCEPTED);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @GetMapping(value = "pullingHandle")

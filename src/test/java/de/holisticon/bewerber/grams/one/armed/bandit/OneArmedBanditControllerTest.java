@@ -33,6 +33,9 @@ class OneArmedBanditControllerTest {
     public static final String CHECKIN_AS_PLAYER_WITH_10_CREDITS =
             new Gson().toJson(new CheckinPojo("player a", new CreditPojo(10)));
     public static final ArrayList<Wheel> WHELLS_COLLECTION = Lists.list(Wheel.APPLE, Wheel.BANANA, Wheel.CLEMENTINE);
+    public static final String URL_CHECKOUT = "/oneArmedBandit/checkout";
+    public static final String URL_PULLING_HANDLE = "/oneArmedBandit/pullingHandle";
+    public static final String URL_CHECKIN = "/oneArmedBandit/checkin";
 
     private MockMvc mockMvc;
 
@@ -59,11 +62,11 @@ class OneArmedBanditControllerTest {
         //given
         //when
         mockMvc.perform(
-                post("/oneArmedBandit/checkin")
+                post(URL_CHECKIN)
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(CHECKIN_AS_PLAYER_WITH_10_CREDITS))
                 //then
-                .andExpect(status().isAccepted());
+                .andExpect(status().isOk());
     }
 
     /**
@@ -79,7 +82,7 @@ class OneArmedBanditControllerTest {
                         WHELLS_COLLECTION, false));
         //when
         mockMvc.perform(
-                get("/oneArmedBandit/pullingHandle"))
+                get(URL_PULLING_HANDLE))
                 //then
                 .andDo(result -> assertThat(result.getResponse().getContentAsString())
                         .contains("{\"credit\":{\"credits\":7},\"wheels\":[\"APPLE\",\"BANANA\",\"CLEMENTINE\"],\"won\":false}"))
@@ -95,10 +98,43 @@ class OneArmedBanditControllerTest {
         when(service.checkout()).thenReturn(new Credit(42));
         //when
         mockMvc.perform(
-                get("/oneArmedBandit/checkout"))
+                get(URL_CHECKOUT))
                 //then
                 .andDo(result -> assertThat(result.getResponse().getContentAsString())
                         .contains("{\"credits\":42}"))
                 .andExpect(status().isOk());
+    }
+
+    @Test
+    public void shouldTranslateExceptionOnCheckin() throws Exception {
+        //given
+        doThrow(new OneArmedBanditException("")).when(service).checkin(any(Credit.class));
+        //when
+        mockMvc.perform(
+                post(URL_CHECKIN))
+                //then
+                .andExpect(status().isBadRequest());
+    }
+
+    @Test
+    public void shouldTranslateExceptionOnPullingHandle() throws Exception {
+        //given
+        when(service.pullingHandle()).thenThrow(new CreditException("Not enough credits"));
+        //when
+        mockMvc.perform(
+                get(URL_PULLING_HANDLE))
+                //then
+                .andExpect(status().isBadRequest());
+    }
+
+    @Test
+    public void shouldTranslateExceptionOnCheckout() throws Exception {
+        //given
+        when(service.checkout()).thenThrow(new CreditException(""));
+        //when
+        mockMvc.perform(
+                get(URL_CHECKOUT))
+                //then
+                .andExpect(status().isBadRequest());
     }
 }
