@@ -3,9 +3,9 @@ package de.dreamnetworx.one.armed.bandit;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class OneArmedBanditServiceImpl implements OneArmedBanditService {
+import java.util.Optional;
 
-    private static final int DEFAULT_RISK_FACTOR = 0;
+public class OneArmedBanditServiceImpl implements OneArmedBanditService {
 
     private Logger log = LoggerFactory.getLogger(OneArmedBanditServiceImpl.class);
     private OneArmedBandit oneArmedBandit;
@@ -30,7 +30,7 @@ public class OneArmedBanditServiceImpl implements OneArmedBanditService {
      */
     @Override
     public GameResult pullingHandle() {
-        return pullingHandle(DEFAULT_RISK_FACTOR);
+        return pullingHandle(Optional.empty());
     }
 
     /**
@@ -41,12 +41,12 @@ public class OneArmedBanditServiceImpl implements OneArmedBanditService {
      * @throws OneArmedBanditException
      */
     @Override
-    public GameResult pullingHandle(int additionalInput) throws OneArmedBanditException {
+    public GameResult pullingHandle(Optional<AdditionalInput> additionalInput) throws OneArmedBanditException {
         if(this.oneArmedBandit == null) {
             throw new OneArmedBanditException("Do check in before pulling the handle");
         }
         log.info("try to pulling handling to challenge player luck.");
-        return this.oneArmedBandit.pullingHandel(new AdditionalInput(additionalInput));
+        return this.oneArmedBandit.pullingHandel(additionalInput);
     }
 
     @Override

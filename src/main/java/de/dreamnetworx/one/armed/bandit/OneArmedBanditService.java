@@ -1,5 +1,7 @@
 package de.dreamnetworx.one.armed.bandit;
 
+import java.util.Optional;
+
 /**
  * Represents the game session for a player. The service save the OneArmedBandit state for http clients.
  */
@@ -27,7 +29,7 @@ public interface OneArmedBanditService {
      * @param additionalInput define the additional input for one game.
      * @return
      */
-    GameResult pullingHandle(int additionalInput);
+    GameResult pullingHandle(Optional<AdditionalInput> additionalInput);
 
     /**
      * Leave the game. The remaining credits returned as benefit.

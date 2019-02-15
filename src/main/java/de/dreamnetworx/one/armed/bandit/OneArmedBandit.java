@@ -42,7 +42,7 @@ public class OneArmedBandit {
         return pullingHandel(Optional.ofNullable(additionalInput));
     }
 
-    private GameResult pullingHandel(Optional<AdditionalInput> additionalInput) throws CreditException {
+    public GameResult pullingHandel(Optional<AdditionalInput> additionalInput) throws CreditException {
         final TemporaryGameResult temporaryGameResult = buildTempGameResult(this.banditStrategy);
 
         this.creditState = calculateNewCreditState(this.creditState, temporaryGameResult, additionalInput);

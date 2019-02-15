@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.context.annotation.RequestScope;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @RestController
@@ -36,10 +37,10 @@ public class OneArmedBanditController {
 
     @GetMapping(value = "pullingHandle/{risk}")
     public ResponseEntity<GameResultPojo> pullingHandle(@PathVariable("risk") int risk) {
-        final GameResult gameResult = oneArmedBanditService.pullingHandle(risk);
+        final GameResult gameResult = oneArmedBanditService.pullingHandle(
+                Optional.ofNullable(new AdditionalInput(risk)));
         return new ResponseEntity<>(toPojo(gameResult), HttpStatus.OK);
     }
-
 
     @GetMapping(value = "checkout")
     public ResponseEntity<CreditPojo> checkout() {

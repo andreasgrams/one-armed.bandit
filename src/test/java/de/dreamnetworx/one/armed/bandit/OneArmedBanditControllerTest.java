@@ -16,6 +16,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 import java.util.ArrayList;
+import java.util.Optional;
 
 import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
 import static org.mockito.Mockito.*;
@@ -95,7 +96,7 @@ class OneArmedBanditControllerTest {
     @Test
     public void shouldPullingTheHandleAbnormalRisk() throws Exception {
         //given
-        when(service.pullingHandle(eq(6))).thenReturn(
+        when(service.pullingHandle(eq(Optional.of(new AdditionalInput(6))))).thenReturn(
                 new GameResult(new Credit(7),
                         new TemporaryGameResult(WHELLS_COLLECTION, false), true));
         //when

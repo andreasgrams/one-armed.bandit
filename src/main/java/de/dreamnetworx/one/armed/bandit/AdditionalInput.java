@@ -1,5 +1,7 @@
 package de.dreamnetworx.one.armed.bandit;
 
+import java.util.Objects;
+
 public class AdditionalInput implements PlayMoney {
 
     private int value;
@@ -15,5 +17,18 @@ public class AdditionalInput implements PlayMoney {
 
     public int getValue() {
         return value;
+    }
+
+    @Override
+    public boolean equals(final Object o) {
+        if(this == o) return true;
+        if(o == null || getClass() != o.getClass()) return false;
+        AdditionalInput that = (AdditionalInput) o;
+        return value == that.value;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(value);
     }
 }
