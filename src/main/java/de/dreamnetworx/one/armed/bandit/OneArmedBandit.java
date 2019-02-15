@@ -41,23 +41,34 @@ public class OneArmedBandit {
     public GameResult pullingHandel(Credit additionalInput) throws CreditException {
         final TemporaryGameResult temporaryGameResult = buildTempGameResult(this.banditStrategy);
 
+        this.creditState = calculateNewCreditState(this.creditState, temporaryGameResult, additionalInput);
+
+        return new GameResult(this.creditState, temporaryGameResult);
+    }
+
+    /**
+     * Calculates the new Credits and use the game won indicator and players additional input
+     *
+     * @param currentState        current credits
+     * @param temporaryGameResult indicates game is won and selected wheels
+     * @param additionalInput     risk input
+     * @return
+     */
+    private Credit calculateNewCreditState(final Credit currentState, final TemporaryGameResult temporaryGameResult, final Credit additionalInput) {
+        Credit newState = currentState.subtract(REGULAR_GAME_PRICE);
         if(temporaryGameResult.isGameWon()) {
             final Credit profitByWheel = temporaryGameResult.getFirstWheelProfit();
-            this.creditState = creditState.subtract(REGULAR_GAME_PRICE);
-
             if(additionalInput.hasPositiveValue()) {
                 int rateRisk = getProfitMultiplicator(additionalInput);
                 final Credit ratedProfitByWheel = profitByWheel.multiplied(rateRisk);
-                this.creditState = creditState.addition(ratedProfitByWheel);
+                newState = newState.addition(ratedProfitByWheel);
             } else {
-                this.creditState = creditState.addition(profitByWheel);
+                newState = newState.addition(profitByWheel);
             }
         } else {
-            this.creditState = creditState.subtract(REGULAR_GAME_PRICE);
-            this.creditState = creditState.subtract(additionalInput);
-
+            newState = newState.subtract(additionalInput);
         }
-        return new GameResult(this.creditState, temporaryGameResult);
+        return newState;
     }
 
     private TemporaryGameResult buildTempGameResult(final IntSupplier banditStrategy) {

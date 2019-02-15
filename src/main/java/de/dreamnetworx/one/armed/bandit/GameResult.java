@@ -1,7 +1,7 @@
 package de.dreamnetworx.one.armed.bandit;
 
 /**
- * Definite the game result. Game result returned after pulling the handle  and
+ * Definite the final game result. Game result returned after pulling the handle  and
  * has a indicator is the game won. Additionally the new calculated credit score returned.
  */
 public class GameResult extends TemporaryGameResult {

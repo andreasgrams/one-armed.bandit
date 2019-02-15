@@ -3,6 +3,9 @@ package de.dreamnetworx.one.armed.bandit;
 import java.util.Collections;
 import java.util.List;
 
+/**
+ * Definite the temporary game result.
+ */
 public class TemporaryGameResult {
 
     private List<Wheel> wheels;
