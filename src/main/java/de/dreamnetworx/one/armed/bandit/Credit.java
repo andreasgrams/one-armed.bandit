@@ -97,4 +97,11 @@ public class Credit {
     public int getValue() {
         return value;
     }
+
+    /**
+     * @return test the Credit value is higher then 0
+     */
+    public boolean hasPositiveValue() {
+        return value > 0;
+    }
 }

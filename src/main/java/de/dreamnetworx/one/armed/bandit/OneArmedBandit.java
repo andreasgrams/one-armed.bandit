@@ -39,25 +39,35 @@ public class OneArmedBandit {
      * @throws throws a CreditException when not enough credits available for this game.
      */
     public GameResult pullingHandel(Credit additionalInput) throws CreditException {
-        int rateRisk = getProfitMultiplicator(additionalInput);
-        final List<Wheel> result = getRandomWheelStates(this.banditStrategy);
-        final boolean isGameWon = isGameWon(result);
-        if(isGameWon) {
-            this.creditState = creditState.subtract(REGULAR_GAME_PRICE);
-            final Credit multiplied = result.get(0).getProfitAsCredit().multiplied(rateRisk);
-            this.creditState = creditState.addition(multiplied);
+        final TemporaryGameResult temporaryGameResult = buildTempGameResult(this.banditStrategy);
 
+        if(temporaryGameResult.isGameWon()) {
+            final Credit profitByWheel = temporaryGameResult.getFirstWheelProfit();
+            this.creditState = creditState.subtract(REGULAR_GAME_PRICE);
+
+            if(additionalInput.hasPositiveValue()) {
+                int rateRisk = getProfitMultiplicator(additionalInput);
+                final Credit ratedProfitByWheel = profitByWheel.multiplied(rateRisk);
+                this.creditState = creditState.addition(ratedProfitByWheel);
+            } else {
+                this.creditState = creditState.addition(profitByWheel);
+            }
         } else {
             this.creditState = creditState.subtract(REGULAR_GAME_PRICE);
             this.creditState = creditState.subtract(additionalInput);
 
         }
-        return new GameResult(this.creditState, result, isGameWon);
+        return new GameResult(this.creditState, temporaryGameResult);
+    }
+
+    private TemporaryGameResult buildTempGameResult(final IntSupplier banditStrategy) {
+        final List<Wheel> result = getRandomWheelStates(banditStrategy);
+        final boolean isGameWon = isGameWon(result);
+        return new TemporaryGameResult(result, isGameWon);
     }
 
     private int getProfitMultiplicator(final Credit additionalInput) {
-        final int result = additionalInput.getValue() / REGULAR_GAME_PRICE.getValue();
-        return result == 0 ? 1 : result;
+        return additionalInput.getValue() / REGULAR_GAME_PRICE.getValue();
     }
 
     /**
