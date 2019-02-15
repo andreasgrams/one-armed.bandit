@@ -1,4 +1,4 @@
-package de.dreamnetworx.one.armed.bandit;
+package de.dreamnetworx.one.armed.bandit.model;
 
 public enum Wheel {
     APPLE(10),

@@ -1,5 +1,6 @@
-package de.dreamnetworx.one.armed.bandit;
+package de.dreamnetworx.one.armed.bandit.endpoint;
 
+import de.dreamnetworx.one.armed.bandit.model.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

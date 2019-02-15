@@ -1,4 +1,4 @@
-package de.dreamnetworx.one.armed.bandit;
+package de.dreamnetworx.one.armed.bandit.model;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;
@@ -13,7 +13,7 @@ public class OneArmedBanditException extends IllegalStateException {
      *
      * @param s the String that contains a detailed message
      */
-    OneArmedBanditException(final String s) {
+    public OneArmedBanditException(final String s) {
         super(s);
     }
 }

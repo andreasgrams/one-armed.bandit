@@ -1,6 +1,8 @@
-package de.dreamnetworx.one.armed.bandit;
+package de.dreamnetworx.one.armed.bandit.endpoint;
 
 import com.google.gson.Gson;
+import de.dreamnetworx.one.armed.bandit.StarterConfig;
+import de.dreamnetworx.one.armed.bandit.model.*;
 import org.assertj.core.util.Lists;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

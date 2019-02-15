@@ -1,4 +1,6 @@
-package de.dreamnetworx.one.armed.bandit;
+package de.dreamnetworx.one.armed.bandit.endpoint;
+
+import de.dreamnetworx.one.armed.bandit.model.*;
 
 import java.util.Optional;
 

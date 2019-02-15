@@ -1,4 +1,4 @@
-package de.dreamnetworx.one.armed.bandit;
+package de.dreamnetworx.one.armed.bandit.model;
 
 import java.util.Objects;
 

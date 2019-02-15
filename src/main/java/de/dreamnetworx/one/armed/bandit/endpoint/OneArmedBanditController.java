@@ -1,5 +1,9 @@
-package de.dreamnetworx.one.armed.bandit;
+package de.dreamnetworx.one.armed.bandit.endpoint;
 
+import de.dreamnetworx.one.armed.bandit.model.AdditionalInput;
+import de.dreamnetworx.one.armed.bandit.model.Credit;
+import de.dreamnetworx.one.armed.bandit.model.GameResult;
+import de.dreamnetworx.one.armed.bandit.model.Wheel;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

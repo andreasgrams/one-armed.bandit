@@ -1,5 +1,7 @@
-package de.dreamnetworx.one.armed.bandit;
+package de.dreamnetworx.one.armed.bandit.endpoint;
 
+import de.dreamnetworx.one.armed.bandit.model.Credit;
+import de.dreamnetworx.one.armed.bandit.model.OneArmedBanditException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

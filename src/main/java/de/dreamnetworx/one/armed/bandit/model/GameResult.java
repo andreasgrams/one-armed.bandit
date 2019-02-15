@@ -1,4 +1,4 @@
-package de.dreamnetworx.one.armed.bandit;
+package de.dreamnetworx.one.armed.bandit.model;
 
 /**
  * Definite the final game result. Game result returned after pulling the handle  and
@@ -17,7 +17,7 @@ public class GameResult extends TemporaryGameResult {
      * @param remainCredits
      * @param temporaryGameResult
      */
-    GameResult(Credit remainCredits, TemporaryGameResult temporaryGameResult, boolean riskGame) {
+    public GameResult(Credit remainCredits, TemporaryGameResult temporaryGameResult, boolean riskGame) {
         super(temporaryGameResult.getWheels(), temporaryGameResult.isGameWon());
         this.credit = new Credit(remainCredits);
         this.riskGame = riskGame;
