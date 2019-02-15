@@ -60,7 +60,7 @@ class OneArmedBanditServiceImplTest {
     }
 
     /**
-     *
+     * Test no Exception thrown if no game session exists. Expected 0 Credits returned.
      */
     @Test
     void shouldNotFailToInvokeCheckoutWithoutBanditSession() {
