@@ -8,6 +8,8 @@ public class GameResult extends TemporaryGameResult {
 
     private Credit credit;
 
+    private boolean riskGame;
+
     /**
      * Instantiate a game result with calculated credits, wheels they selected and a indicator has the
      * player won the game.
@@ -15,9 +17,10 @@ public class GameResult extends TemporaryGameResult {
      * @param remainCredits
      * @param temporaryGameResult
      */
-    GameResult(Credit remainCredits, TemporaryGameResult temporaryGameResult) {
+    GameResult(Credit remainCredits, TemporaryGameResult temporaryGameResult, boolean riskGame) {
         super(temporaryGameResult.getWheels(), temporaryGameResult.isGameWon());
         this.credit = new Credit(remainCredits);
+        this.riskGame = riskGame;
     }
 
     /**
@@ -27,5 +30,14 @@ public class GameResult extends TemporaryGameResult {
      */
     public Credit getCreditsRemained() {
         return credit;
+    }
+
+    /**
+     * Risk game indicator
+     *
+     * @return is risk game
+     */
+    public boolean isRiskGame() {
+        return riskGame;
     }
 }

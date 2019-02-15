@@ -116,6 +116,7 @@ class OneArmedBanditTest {
         GameResult gameResult = cut.pullingHandel(new AdditionalInput(6));
         //then
         assertThat(gameResult.isGameWon()).isTrue();
+        assertThat(gameResult.isRiskGame()).isTrue();
         assertThat(gameResult.getCreditsRemained())
                 .isEqualTo(new Credit(27));
     }
@@ -137,8 +138,26 @@ class OneArmedBanditTest {
         GameResult gameResult = cut.pullingHandel(new AdditionalInput(6));
         //then
         assertThat(gameResult.isGameWon()).isFalse();
+        assertThat(gameResult.isRiskGame()).isTrue();
         assertThat(gameResult.getCreditsRemained())
                 .isEqualTo(new Credit(1));
+    }
+
+    /**
+     * Try to play with 4 Credits a game with additional input of 6 credits.
+     * Expected the game ended with a CreditException because minimal 10 Credits required.
+     */
+    @Test
+    void shouldPullingHandleWithWithAbnormalRiskAndNotEnoughCredits() {
+        //given
+        OneArmedBandit cut = new OneArmedBandit(new Credit(4));
+        //when
+        try {
+            cut.pullingHandel(new AdditionalInput(6));
+            //then
+        } catch (CreditException e) {
+            assertThat(e).hasMessageContaining("costs 6 credits (with additional input)");
+        }
     }
 
     /**

@@ -2,7 +2,7 @@ package de.dreamnetworx.one.armed.bandit;
 
 import java.util.Objects;
 
-public class Credit {
+public class Credit implements PlayMoney {
 
     private int value;
 
@@ -12,7 +12,7 @@ public class Credit {
      * @param credit
      * @throws CreditException When the given value is negative
      */
-    public Credit(Credit credit) {
+    public Credit(PlayMoney credit) {
         this(credit.getValue());
     }
 
@@ -23,10 +23,10 @@ public class Credit {
      * @throws CreditException When the given value is negative
      */
     public Credit(final int value) {
-        this.value = value;
-        if(isNegative()) {
+        if(isNegative(value)) {
             throw new CreditException(String.format("The credits must be a positive value. Given value: %d", value));
         }
+        this.value = value;
     }
 
     /**
@@ -36,15 +36,20 @@ public class Credit {
      * @return the credit result
      * @throws CreditException
      */
-    public Credit subtract(final Credit creditsToSubtract) {
+    public Credit subtract(final PlayMoney creditsToSubtract) {
         try {
             return new Credit(value - creditsToSubtract.getValue());
         } catch (CreditException e) {
+            String hint = "";
+            int costs = OneArmedBandit.REGULAR_GAME_PRICE.getValue();
+            if(creditsToSubtract instanceof AdditionalInput) {
+                hint = " (with additional input)";
+                costs = +creditsToSubtract.getValue();
+            }
             throw new CreditException(String.format(
-                    "Not enough credits to play. One game costs %d credits. Remaining credits: %d",
-                    OneArmedBandit.REGULAR_GAME_PRICE.getValue(), value));
+                    "Not enough credits to play. One game costs %d credits%s. Remaining credits: %d",
+                    costs, hint, value));
         }
-
     }
 
     /**
@@ -53,7 +58,7 @@ public class Credit {
      * @param credit
      * @return
      */
-    public Credit addition(final Credit credit) {
+    public Credit addition(final PlayMoney credit) {
         return new Credit(value + credit.getValue());
     }
 
@@ -87,8 +92,8 @@ public class Credit {
                 '}';
     }
 
-    private boolean isNegative() {
-        return this.value < 0;
+    private boolean isNegative(int value) {
+        return value < 0;
     }
 
     /**

@@ -47,7 +47,7 @@ public class OneArmedBandit {
 
         this.creditState = calculateNewCreditState(this.creditState, temporaryGameResult, additionalInput);
 
-        return new GameResult(this.creditState, temporaryGameResult);
+        return new GameResult(this.creditState, temporaryGameResult, additionalInput.isPresent());
     }
 
     /**
@@ -71,7 +71,7 @@ public class OneArmedBandit {
             }
         } else {
             if(additionalInput.isPresent()) {
-                newState = newState.subtract(additionalInput.get().asCredit());
+                newState = newState.subtract(additionalInput.get());
             }
         }
         return newState;

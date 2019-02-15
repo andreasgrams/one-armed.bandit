@@ -1,6 +1,6 @@
 package de.dreamnetworx.one.armed.bandit;
 
-public class AdditionalInput {
+public class AdditionalInput implements PlayMoney {
 
     private int value;
 
@@ -11,10 +11,6 @@ public class AdditionalInput {
                     String.format("Only additional inputs divisible by %s allowed!", price));
         }
         this.value = value;
-    }
-
-    public Credit asCredit() {
-        return new Credit(value);
     }
 
     public int getValue() {

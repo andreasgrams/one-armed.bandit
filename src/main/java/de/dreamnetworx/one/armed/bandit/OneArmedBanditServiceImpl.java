@@ -5,6 +5,8 @@ import org.slf4j.LoggerFactory;
 
 public class OneArmedBanditServiceImpl implements OneArmedBanditService {
 
+    private static final int DEFAULT_RISK_FACTOR = 0;
+
     private Logger log = LoggerFactory.getLogger(OneArmedBanditServiceImpl.class);
     private OneArmedBandit oneArmedBandit;
 
@@ -19,13 +21,32 @@ public class OneArmedBanditServiceImpl implements OneArmedBanditService {
         }
     }
 
+    /**
+     * Challenge your luck.
+     * <p>
+     * Works like {@link OneArmedBandit#pullingHandel()}
+     *
+     * @throws OneArmedBanditException when player not checked in
+     */
     @Override
-    public GameResult pullingHandle() throws OneArmedBanditException {
+    public GameResult pullingHandle() {
+        return pullingHandle(DEFAULT_RISK_FACTOR);
+    }
+
+    /**
+     * @param additionalInput define the factor of abnormal risk. If the game is won,
+     *                        the profit multiplied by risk factor. Is the game lose,
+     *                        the game costs additionalRisk Credits plus normal price of 3 credits.
+     * @return
+     * @throws OneArmedBanditException
+     */
+    @Override
+    public GameResult pullingHandle(int additionalInput) throws OneArmedBanditException {
         if(this.oneArmedBandit == null) {
             throw new OneArmedBanditException("Do check in before pulling the handle");
         }
         log.info("try to pulling handling to challenge player luck.");
-        return this.oneArmedBandit.pullingHandel();
+        return this.oneArmedBandit.pullingHandel(new AdditionalInput(additionalInput));
     }
 
     @Override
