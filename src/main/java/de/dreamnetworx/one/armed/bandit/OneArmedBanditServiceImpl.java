@@ -24,7 +24,7 @@ public class OneArmedBanditServiceImpl implements OneArmedBanditService {
     /**
      * Challenge your luck.
      * <p>
-     * Works like {@link OneArmedBandit#pullingHandel()}
+     * Works like {@link OneArmedBandit#pullingHandle()}
      *
      * @throws OneArmedBanditException when player not checked in
      */
@@ -46,7 +46,7 @@ public class OneArmedBanditServiceImpl implements OneArmedBanditService {
             throw new OneArmedBanditException("Do check in before pulling the handle");
         }
         log.info("try to pulling handling to challenge player luck.");
-        return this.oneArmedBandit.pullingHandel(additionalInput);
+        return this.oneArmedBandit.pullingHandle(additionalInput);
     }
 
     @Override

@@ -25,7 +25,7 @@ class OneArmedBanditTest {
         OneArmedBandit cut = new OneArmedBandit(CREDITS_TO_PLAY);
         cut.setBanditStrategy(getLoseStrategy());
         //when
-        GameResult gameResult = cut.pullingHandel();
+        GameResult gameResult = cut.pullingHandle();
         //then
         assertThat(gameResult.isGameWon()).isFalse();
     }
@@ -39,7 +39,7 @@ class OneArmedBanditTest {
         //given
         OneArmedBandit cut = new OneArmedBandit(CREDITS_TO_PLAY);
         //when
-        GameResult gameResult = cut.pullingHandel();
+        GameResult gameResult = cut.pullingHandle();
         //then
         assertThat(gameResult.getCreditsRemained()).isNotNull();
         assertThat(gameResult.getWheels()).hasSize(3);
@@ -57,7 +57,7 @@ class OneArmedBanditTest {
         OneArmedBandit cut = new OneArmedBandit(CREDITS_TO_PLAY);
         cut.setBanditStrategy(WIN_STRATEGY_WITH_APPLE_STATE);
         //when
-        GameResult gameResult = cut.pullingHandel();
+        GameResult gameResult = cut.pullingHandle();
         //then
         assertThat(gameResult.isGameWon()).isTrue();
         assertThat(gameResult.getCreditsRemained())
@@ -75,7 +75,7 @@ class OneArmedBanditTest {
         OneArmedBandit cut = new OneArmedBandit(NOT_ENOUGH_CREDITS_TO_PLAY);
         //when
         try {
-            cut.pullingHandel();
+            cut.pullingHandle();
             //then
         } catch (CreditException e) {
             assertThat(e).hasMessageContaining("Not enough credits to play. One game costs 3 credits.");
@@ -113,7 +113,7 @@ class OneArmedBanditTest {
         OneArmedBandit cut = new OneArmedBandit(CREDITS_TO_PLAY);
         cut.setBanditStrategy(WIN_STRATEGY_WITH_APPLE_STATE);
         //when
-        GameResult gameResult = cut.pullingHandel(new AdditionalInput(6));
+        GameResult gameResult = cut.pullingHandle(new AdditionalInput(6));
         //then
         assertThat(gameResult.isGameWon()).isTrue();
         assertThat(gameResult.isRiskGame()).isTrue();
@@ -135,7 +135,7 @@ class OneArmedBanditTest {
         OneArmedBandit cut = new OneArmedBandit(CREDITS_TO_PLAY);
         cut.setBanditStrategy(getLoseStrategy());
         //when
-        GameResult gameResult = cut.pullingHandel(new AdditionalInput(6));
+        GameResult gameResult = cut.pullingHandle(new AdditionalInput(6));
         //then
         assertThat(gameResult.isGameWon()).isFalse();
         assertThat(gameResult.isRiskGame()).isTrue();
@@ -153,7 +153,7 @@ class OneArmedBanditTest {
         OneArmedBandit cut = new OneArmedBandit(new Credit(4));
         //when
         try {
-            cut.pullingHandel(new AdditionalInput(6));
+            cut.pullingHandle(new AdditionalInput(6));
             //then
         } catch (CreditException e) {
             assertThat(e).hasMessageContaining("costs 6 credits (with additional input)");

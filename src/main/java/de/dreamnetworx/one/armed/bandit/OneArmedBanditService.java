@@ -17,7 +17,7 @@ public interface OneArmedBanditService {
     /**
      * Challenge your luck.
      *
-     * Works like {@link OneArmedBandit#pullingHandel()}
+     * Works like {@link OneArmedBandit#pullingHandle()}
      *
      * @throws OneArmedBanditException when player not checked in
      */
