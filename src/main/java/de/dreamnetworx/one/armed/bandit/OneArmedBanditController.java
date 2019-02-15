@@ -36,9 +36,6 @@ public class OneArmedBanditController {
 
     @GetMapping(value = "pullingHandle/{risk}")
     public ResponseEntity<GameResultPojo> pullingHandle(@PathVariable("risk") int risk) {
-        if(risk < OneArmedBandit.REGULAR_GAME_PRICE.getValue()) {
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-        }
         final GameResult gameResult = oneArmedBanditService.pullingHandle(risk);
         return new ResponseEntity<>(toPojo(gameResult), HttpStatus.OK);
     }

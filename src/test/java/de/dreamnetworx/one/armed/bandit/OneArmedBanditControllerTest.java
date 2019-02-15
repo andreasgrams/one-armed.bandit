@@ -77,10 +77,30 @@ class OneArmedBanditControllerTest {
         //given
         when(service.pullingHandle()).thenReturn(
                 new GameResult(new Credit(7),
-                        WHELLS_COLLECTION, false));
+                        new TemporaryGameResult(WHELLS_COLLECTION, false), false));
         //when
         mockMvc.perform(
                 get(URL_PULLING_HANDLE))
+                //then
+                .andDo(result -> assertThat(result.getResponse().getContentAsString())
+                        .contains("{\"credit\":{\"credits\":7},\"wheels\":[\"APPLE\",\"BANANA\",\"CLEMENTINE\"],\"won\":false}"))
+                .andExpect(status().isOk());
+    }
+
+    /**
+     * Test play a round by pulling the handle with additional input for abnormal risk.
+     *
+     * @throws Exception unexpected test exceptions by perform http request
+     */
+    @Test
+    public void shouldPullingTheHandleAbnormalRisk() throws Exception {
+        //given
+        when(service.pullingHandle(eq(6))).thenReturn(
+                new GameResult(new Credit(7),
+                        new TemporaryGameResult(WHELLS_COLLECTION, false), true));
+        //when
+        mockMvc.perform(
+                get(URL_PULLING_HANDLE + "/6"))
                 //then
                 .andDo(result -> assertThat(result.getResponse().getContentAsString())
                         .contains("{\"credit\":{\"credits\":7},\"wheels\":[\"APPLE\",\"BANANA\",\"CLEMENTINE\"],\"won\":false}"))
@@ -102,7 +122,6 @@ class OneArmedBanditControllerTest {
                         .contains("{\"credits\":42}"))
                 .andExpect(status().isOk());
     }
-
 
     @Test
     public void shouldTranslateExceptionOnPullingHandle() throws Exception {
