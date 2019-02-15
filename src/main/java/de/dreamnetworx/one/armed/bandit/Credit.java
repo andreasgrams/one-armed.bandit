@@ -2,9 +2,17 @@ package de.dreamnetworx.one.armed.bandit;
 
 import java.util.Objects;
 
-public class Credit implements PlayMoney {
+public class Credit extends PlayMoneyImpl {
 
-    private int value;
+    /**
+     * Construct a positive Credit Instance if the given value is negative, CreditException is thrown.
+     *
+     * @param value
+     * @throws CreditException When the given value is negative
+     */
+    public Credit(final int value) {
+        super(value);
+    }
 
     /**
      * Construct a positive Credit when the given value is negative, CreditException is thrown.
@@ -12,21 +20,8 @@ public class Credit implements PlayMoney {
      * @param credit
      * @throws CreditException When the given value is negative
      */
-    public Credit(PlayMoney credit) {
-        this(credit.getValue());
-    }
-
-    /**
-     * Construct a positive Credit when the given value is negative, CreditException is thrown.
-     *
-     * @param value
-     * @throws CreditException When the given value is negative
-     */
-    public Credit(final int value) {
-        if(isNegative(value)) {
-            throw new CreditException(String.format("The credits must be a positive value. Given value: %d", value));
-        }
-        this.value = value;
+    public Credit(final PlayMoney credit) {
+        super(credit);
     }
 
     /**
@@ -47,7 +42,7 @@ public class Credit implements PlayMoney {
                 costs += creditsToSubtract.getValue();
             }
             throw new CreditException(String.format(
-                    "Not enough credits to play. One game costs %d credits%s. Remaining credits: %d",
+                    "Not enough credits to play. This game costs %d credits%s. Remaining credits: %d",
                     costs, hint, value));
         }
     }
@@ -68,8 +63,8 @@ public class Credit implements PlayMoney {
      * @param multipliedBy
      * @return
      */
-    public Credit multiplied(final int multipliedBy) {
-        return new Credit(value * multipliedBy);
+    public Credit multiplied(final PlayMoney multipliedBy) {
+        return new Credit(value * multipliedBy.getValue());
     }
 
     @Override
@@ -92,9 +87,6 @@ public class Credit implements PlayMoney {
                 '}';
     }
 
-    private boolean isNegative(int value) {
-        return value < 0;
-    }
 
     /**
      * @return the credits

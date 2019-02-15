@@ -68,7 +68,7 @@ public class OneArmedBandit {
         if(temporaryGameResult.isGameWon()) {
             final Credit profitByWheel = temporaryGameResult.getFirstWheelProfit();
             if(additionalInput.isPresent()) {
-                int rateRisk = getProfitMultiplicator(additionalInput.get());
+                Credit rateRisk = getProfitMultiplicator(additionalInput.get());
                 final Credit ratedProfitByWheel = profitByWheel.multiplied(rateRisk);
                 newState = newState.addition(ratedProfitByWheel);
             } else {
@@ -88,8 +88,8 @@ public class OneArmedBandit {
         return new TemporaryGameResult(result, isGameWon);
     }
 
-    private int getProfitMultiplicator(final AdditionalInput additionalInput) {
-        return additionalInput.getValue() / REGULAR_GAME_PRICE.getValue();
+    private Credit getProfitMultiplicator(final AdditionalInput additionalInput) {
+        return new Credit(additionalInput.getValue() / REGULAR_GAME_PRICE.getValue());
     }
 
     /**
