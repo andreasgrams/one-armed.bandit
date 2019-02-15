@@ -113,7 +113,7 @@ class OneArmedBanditTest {
         OneArmedBandit cut = new OneArmedBandit(CREDITS_TO_PLAY);
         cut.setBanditStrategy(WIN_STRATEGY_WITH_APPLE_STATE);
         //when
-        GameResult gameResult = cut.pullingHandel(new Credit(6));
+        GameResult gameResult = cut.pullingHandel(new AdditionalInput(6));
         //then
         assertThat(gameResult.isGameWon()).isTrue();
         assertThat(gameResult.getCreditsRemained())
@@ -122,10 +122,10 @@ class OneArmedBanditTest {
 
     /**
      * Test to play with abnormal Risk. The player has 10 Credits to play with and
-     * set 6 Credits as risk input. Expected the player lose the game.
+     * set 6 Credits as risk input. Expected the player lose the game and has only 1 credit.
      * <p>
      * The Credit calculation in detail:
-     * Step 1 # 10  - 3 = 7  | remaining Credits after pay game cost
+     * Step 1 # 10 - 3 = 7   | remaining Credits after pay game cost
      * Step 2 # 7 - 6 = 1    | remaining credits
      */
     @Test
@@ -134,7 +134,7 @@ class OneArmedBanditTest {
         OneArmedBandit cut = new OneArmedBandit(CREDITS_TO_PLAY);
         cut.setBanditStrategy(getLoseStrategy());
         //when
-        GameResult gameResult = cut.pullingHandel(new Credit(6));
+        GameResult gameResult = cut.pullingHandel(new AdditionalInput(6));
         //then
         assertThat(gameResult.isGameWon()).isFalse();
         assertThat(gameResult.getCreditsRemained())
