@@ -1,5 +1,8 @@
 package de.dreamnetworx.one.armed.bandit;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.util.*;
 import java.util.function.IntSupplier;
 import java.util.stream.Stream;
@@ -10,6 +13,8 @@ public class OneArmedBandit {
 
     private Credit creditState;
     private IntSupplier banditStrategy;
+
+    Logger log = LoggerFactory.getLogger(OneArmedBandit.class);
 
     /**
      * Initialized the one armed bandit with the given credits.
@@ -44,10 +49,10 @@ public class OneArmedBandit {
 
     public GameResult pullingHandle(Optional<AdditionalInput> additionalInput) throws CreditException {
         final TemporaryGameResult temporaryGameResult = buildTempGameResult(this.banditStrategy);
-
         this.creditState = calculateNewCreditState(this.creditState, temporaryGameResult, additionalInput);
-
-        return new GameResult(this.creditState, temporaryGameResult, additionalInput.isPresent());
+        final GameResult gameResult = new GameResult(this.creditState, temporaryGameResult, additionalInput.isPresent());
+        log.info("game result {}", gameResult);
+        return gameResult;
     }
 
     /**

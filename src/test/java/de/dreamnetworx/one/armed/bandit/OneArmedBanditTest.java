@@ -156,7 +156,7 @@ class OneArmedBanditTest {
             cut.pullingHandle(new AdditionalInput(6));
             //then
         } catch (CreditException e) {
-            assertThat(e).hasMessageContaining("costs 6 credits (with additional input)");
+            assertThat(e).hasMessageContaining("costs 9 credits (with additional input)");
         }
     }
 

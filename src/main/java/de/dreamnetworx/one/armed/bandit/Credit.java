@@ -44,7 +44,7 @@ public class Credit implements PlayMoney {
             int costs = OneArmedBandit.REGULAR_GAME_PRICE.getValue();
             if(creditsToSubtract instanceof AdditionalInput) {
                 hint = " (with additional input)";
-                costs = +creditsToSubtract.getValue();
+                costs += creditsToSubtract.getValue();
             }
             throw new CreditException(String.format(
                     "Not enough credits to play. One game costs %d credits%s. Remaining credits: %d",

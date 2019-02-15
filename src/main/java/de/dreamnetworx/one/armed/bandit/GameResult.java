@@ -40,4 +40,9 @@ public class GameResult extends TemporaryGameResult {
     public boolean isRiskGame() {
         return riskGame;
     }
+
+    @Override
+    public String toString() {
+        return "GameResult{" + "credit=" + credit + ", riskGame=" + riskGame + ", won=" + super.isGameWon() + '}';
+    }
 }
