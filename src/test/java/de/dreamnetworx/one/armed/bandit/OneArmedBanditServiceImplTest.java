@@ -30,7 +30,7 @@ class OneArmedBanditServiceImplTest {
     }
 
     /**
-     * Should prevent before session without check ins. Excepted OneArmedBanditException with
+     * Block games until player not checked in. Excepted OneArmedBanditException with
      * explanation why pulling the does not work.
      */
     @Test
