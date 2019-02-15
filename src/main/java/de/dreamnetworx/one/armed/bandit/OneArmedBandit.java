@@ -28,13 +28,36 @@ public class OneArmedBandit {
      * @throws throws a CreditException when not enough credits available for this game.
      */
     public GameResult pullingHandel() throws CreditException {
-        this.creditState = creditState.subtract(REGULAR_GAME_PRICE);
+        return pullingHandel(new Credit(0));
+    }
+
+    /**
+     * Start the game by pulling the handel.
+     *
+     * @param additionalInput risk input for one game.
+     * @return Returns the game result after pulling the handle.
+     * @throws throws a CreditException when not enough credits available for this game.
+     */
+    public GameResult pullingHandel(Credit additionalInput) throws CreditException {
+        int rateRisk = getProfitMultiplicator(additionalInput);
         final List<Wheel> result = getRandomWheelStates(this.banditStrategy);
         final boolean isGameWon = isGameWon(result);
         if(isGameWon) {
-            this.creditState = creditState.addition(result.get(0).getProfitAsCredit());
+            this.creditState = creditState.subtract(REGULAR_GAME_PRICE);
+            final Credit multiplied = result.get(0).getProfitAsCredit().multiplied(rateRisk);
+            this.creditState = creditState.addition(multiplied);
+
+        } else {
+            this.creditState = creditState.subtract(REGULAR_GAME_PRICE);
+            this.creditState = creditState.subtract(additionalInput);
+
         }
         return new GameResult(this.creditState, result, isGameWon);
+    }
+
+    private int getProfitMultiplicator(final Credit additionalInput) {
+        final int result = additionalInput.getValue() / REGULAR_GAME_PRICE.getValue();
+        return result == 0 ? 1 : result;
     }
 
     /**
@@ -46,13 +69,6 @@ public class OneArmedBandit {
     public Credit increaseCredits(final Credit credit) {
         this.creditState = this.creditState.addition(credit);
         return this.creditState;
-    }
-
-    /**
-     * @return the given creditState
-     */
-    public Credit getCredits() {
-        return new Credit(this.creditState);
     }
 
     /**
@@ -87,7 +103,15 @@ public class OneArmedBandit {
     }
 
     /**
+     * @return the given creditState
+     */
+    public Credit getCredits() {
+        return new Credit(this.creditState);
+    }
+
+    /**
      * The bandit strategy is used for selecting the wheel state. The given index must between 0 - {@link Wheel}.length.
+     *
      * @param banditStrategy
      */
     void setBanditStrategy(IntSupplier banditStrategy) {

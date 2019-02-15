@@ -57,15 +57,14 @@ public class Credit {
         return new Credit(value + credit.getValue());
     }
 
-    private boolean isNegative() {
-        return this.value < 0;
-    }
-
     /**
-     * @return the credits
+     * Multiplied the credit By given parameter
+     *
+     * @param multipliedBy
+     * @return
      */
-    public int getValue() {
-        return value;
+    public Credit multiplied(final int multipliedBy) {
+        return new Credit(value * multipliedBy);
     }
 
     @Override
@@ -86,5 +85,16 @@ public class Credit {
         return "Credit{" +
                 "value=" + value +
                 '}';
+    }
+
+    private boolean isNegative() {
+        return this.value < 0;
+    }
+
+    /**
+     * @return the credits
+     */
+    public int getValue() {
+        return value;
     }
 }
