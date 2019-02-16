@@ -1,7 +1,6 @@
 # Einarmiger Bandit / One-armed Bandit
 
-Der Einarmiger Bandit ist ein Geldspielautomat. Üblicherweise wurden die Geräte früher mechanisch, später elektromechanisch und heut  
-elektronisch betrieben. Nach dem Einwurf von Geld wird an dem Hebel gezogen um das Spiel zu beginnen. Durch Zufall werden die Abbildung 
+Der Einarmiger Bandit ist ein Geldspielautomat. Üblicherweise wurden die Geräte früher mechanisch, später elektromechanisch und heut elektronisch betrieben. Nach dem Einwurf von Geld wird an dem Hebel gezogen um das Spiel zu beginnen. Durch Zufall werden die Abbildung 
 oder Zahlen der 3 Rollen in einen Zustand gebracht. Ergab die Spielrunde dreimal die gleich Ergebnisse auf den Rollen, hat der Spiele die 
 Runde gewonnen. 
 
