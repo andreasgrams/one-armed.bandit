@@ -61,11 +61,11 @@ Postman collection !
 
 Der Spieler kann sich am Spielautomaten anmelden mit seinem Namen und den Kredits die er einsetzen möchte.   
 
- URL
+#### URL
  
     POST http://localhost:8080/oneArmedBandit/checkin
     
- Json Request Body 
+#### Json Request Body 
     
     {
         "player" : "Player One",
@@ -74,7 +74,7 @@ Der Spieler kann sich am Spielautomaten anmelden mit seinem Namen und den Kredit
     	    }
     }
 
-Response Code
+#### Response Code
   
 - 200 OK - check in erfolgreich 
 - 400 Bad Request - Bei ungültigen Eingaben wie negative Kredits 
@@ -83,11 +83,11 @@ Response Code
 
 Weist der Kontostand des Spielers genügend Kredits auf, kann der Hebel gezogen werden um eine Runde zu spielen 
 
-  URL 
+####  URL 
   
     GET http://localhost:8080/oneArmedBandit/pullingHandle
 
-  Response Body 
+####  Response Body 
   
      {
          "credit": {
@@ -101,7 +101,7 @@ Weist der Kontostand des Spielers genügend Kredits auf, kann der Hebel gezogen 
          "won": true
      }
   
-  Response Code
+#### Response Code
 
  - 200 OK - check in erfolgreich 
  - 400 Bad Request - Wenn kein CheckIn erfolgte oder Kredits nicht ausreichen
@@ -112,11 +112,11 @@ Weist der Kontostand des Spielers genügend Kredits auf, kann der Hebel gezogen 
 Weist der Kontostand des Spielers genügend Kredits auf, kann der Spieler unter angaben des zusätzlichen Einsatzes
 als URL Parameter ein Risiko Spiel starten. 
 
-  URL 
+#### URL 
   
     GET http://localhost:8080/oneArmedBandit/pullingHandle/6
 
-  Response Body 
+#### Response Body 
   
      {
          "credit": {
@@ -131,7 +131,7 @@ als URL Parameter ein Risiko Spiel starten.
          "riskGame": true
      }
   
-  Response Code
+#### Response Code
 
  - 200 OK - check in erfolgreich 
  - 400 Bad Request - Wenn kein CheckIn erfolgte oder Kredits nicht ausreichen
@@ -143,19 +143,18 @@ als URL Parameter ein Risiko Spiel starten.
  Möchte der Spieler das Spiel beenden, kann er auschecken und bekommt die verbleibenden Kredits 
  ausgezahlt. 
  
- 
- URL 
+ #### URL 
  
     GET http://localhost:8080/oneArmedBandit/checkout
     
 
- Response Body 
+#### Response Body 
  
     {
         "credits": 42
     }
     
     
-Response Code
+#### Response Code
     
 - 200 OK - check in erfolgreich 
