@@ -1,7 +1,6 @@
 package de.dreamnetworx.one.armed.bandit.endpoint;
 
 import com.google.gson.Gson;
-import de.dreamnetworx.one.armed.bandit.StarterConfig;
 import de.dreamnetworx.one.armed.bandit.model.*;
 import org.assertj.core.util.Lists;
 import org.junit.jupiter.api.BeforeEach;
@@ -12,7 +11,6 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.http.MediaType;
-import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
@@ -27,7 +25,6 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @RunWith(SpringRunner.class)
-@ContextConfiguration(classes = {StarterConfig.class})
 @WebMvcTest(value = OneArmedBanditController.class)
 class OneArmedBanditControllerTest {
 

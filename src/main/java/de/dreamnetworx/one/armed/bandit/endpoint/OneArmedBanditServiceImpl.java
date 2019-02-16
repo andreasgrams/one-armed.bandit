@@ -3,9 +3,14 @@ package de.dreamnetworx.one.armed.bandit.endpoint;
 import de.dreamnetworx.one.armed.bandit.model.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.context.annotation.ScopedProxyMode;
+import org.springframework.stereotype.Component;
+import org.springframework.web.context.annotation.SessionScope;
 
 import java.util.Optional;
 
+@Component
+@SessionScope(proxyMode = ScopedProxyMode.INTERFACES)
 public class OneArmedBanditServiceImpl implements OneArmedBanditService {
 
     private Logger log = LoggerFactory.getLogger(OneArmedBanditServiceImpl.class);
