@@ -7,6 +7,7 @@ public class GameResultPojo {
     private CreditPojo credit;
     private List<String> wheels;
     private boolean won;
+    private boolean riskGame;
 
     public GameResultPojo() {
     }
@@ -33,5 +34,13 @@ public class GameResultPojo {
 
     public void setWon(final boolean won) {
         this.won = won;
+    }
+
+    public boolean isRiskGame() {
+        return riskGame;
+    }
+
+    public void setRiskGame(final boolean riskGame) {
+        this.riskGame = riskGame;
     }
 }

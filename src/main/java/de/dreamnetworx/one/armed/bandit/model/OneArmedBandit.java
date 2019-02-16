@@ -14,7 +14,7 @@ public class OneArmedBandit {
     private Credit creditState;
     private IntSupplier banditStrategy;
 
-    Logger log = LoggerFactory.getLogger(OneArmedBandit.class);
+    private Logger log = LoggerFactory.getLogger(OneArmedBandit.class);
 
     /**
      * Initialized the one armed bandit with the given credits.
@@ -36,23 +36,34 @@ public class OneArmedBandit {
         return pullingHandle(Optional.empty());
     }
 
-    /**
-     * Start the game by pulling the handel.
-     *
-     * @param additionalInput risk input for one game.
-     * @return Returns the game result after pulling the handle.
-     * @throws throws a CreditException when not enough credits available for this game.
-     */
-    public GameResult pullingHandle(AdditionalInput additionalInput) throws CreditException {
+    GameResult pullingHandle(AdditionalInput additionalInput) throws CreditException {
         return pullingHandle(Optional.ofNullable(additionalInput));
     }
 
+    /**
+     * Start the game by pulling the handel.
+     *
+     * @param additionalInput optional risk input for one game.
+     * @return Returns the game result after pulling the handle.
+     * @throws throws a CreditException when not enough credits available for this game.
+     */
     public GameResult pullingHandle(Optional<AdditionalInput> additionalInput) throws CreditException {
         final TemporaryGameResult temporaryGameResult = buildTempGameResult(this.banditStrategy);
         this.creditState = calculateNewCreditState(this.creditState, temporaryGameResult, additionalInput);
         final GameResult gameResult = new GameResult(this.creditState, temporaryGameResult, additionalInput.isPresent());
         log.info("game result {}", gameResult);
         return gameResult;
+    }
+
+    /**
+     * Increase the given credits
+     *
+     * @param credit increased by value
+     * @return the given creditState
+     */
+    public Credit increaseCredits(final Credit credit) {
+        this.creditState = this.creditState.addition(credit);
+        return this.creditState;
     }
 
     /**
@@ -89,18 +100,7 @@ public class OneArmedBandit {
     }
 
     private Credit getProfitMultiplicator(final AdditionalInput additionalInput) {
-        return new Credit(additionalInput.getValue() / REGULAR_GAME_PRICE.getValue());
-    }
-
-    /**
-     * Increase the given credits
-     *
-     * @param credit increased by value
-     * @return the given creditState
-     */
-    public Credit increaseCredits(final Credit credit) {
-        this.creditState = this.creditState.addition(credit);
-        return this.creditState;
+        return new Credit((REGULAR_GAME_PRICE.getValue() + additionalInput.getValue()) / REGULAR_GAME_PRICE.getValue());
     }
 
     /**

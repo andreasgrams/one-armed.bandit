@@ -61,6 +61,7 @@ public class OneArmedBanditController {
         result.setCredit(toPojo(gameResult.getCreditsRemained()));
         result.setWheels(getWheelNames(gameResult.getWheels()));
         result.setWon(gameResult.isGameWon());
+        result.setRiskGame(gameResult.isRiskGame());
         return result;
     }
 

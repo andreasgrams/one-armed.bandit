@@ -103,7 +103,7 @@ class OneArmedBanditControllerTest {
                 get(URL_PULLING_HANDLE + "/6"))
                 //then
                 .andDo(result -> assertThat(result.getResponse().getContentAsString())
-                        .contains("{\"credit\":{\"credits\":7},\"wheels\":[\"APPLE\",\"BANANA\",\"CLEMENTINE\"],\"won\":false}"))
+                        .contains("{\"credit\":{\"credits\":7},\"wheels\":[\"APPLE\",\"BANANA\",\"CLEMENTINE\"],\"won\":false,\"riskGame\":true}"))
                 .andExpect(status().isOk());
     }
 
