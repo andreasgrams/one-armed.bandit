@@ -14,7 +14,7 @@ class OneArmedBanditTest {
     static final IntSupplier WIN_STRATEGY_WITH_APPLE_STATE = () -> 0;
     static final Credit NOT_ENOUGH_CREDITS_TO_PLAY = new Credit(OneArmedBandit.REGULAR_GAME_PRICE)
             .subtract(new Credit(1));
-    static final Credit CREDITS_TO_PLAY = new Credit(10);
+    static final Credit TEN_CREDITS_TO_PLAY = new Credit(10);
 
     /**
      * Test to lose a game when different wheels states arise from the game.
@@ -22,7 +22,7 @@ class OneArmedBanditTest {
     @Test
     void shouldLoseAGame() {
         //given
-        OneArmedBandit cut = new OneArmedBandit(CREDITS_TO_PLAY);
+        OneArmedBandit cut = new OneArmedBandit(TEN_CREDITS_TO_PLAY);
         cut.setBanditStrategy(getLoseStrategy());
         //when
         GameResult gameResult = cut.pullingHandle();
@@ -37,7 +37,7 @@ class OneArmedBanditTest {
     @Test
     void shouldStartARegularGame() {
         //given
-        OneArmedBandit cut = new OneArmedBandit(CREDITS_TO_PLAY);
+        OneArmedBandit cut = new OneArmedBandit(TEN_CREDITS_TO_PLAY);
         //when
         GameResult gameResult = cut.pullingHandle();
         //then
@@ -54,14 +54,14 @@ class OneArmedBanditTest {
     @Test
     void shouldWinAGame() {
         //given
-        OneArmedBandit cut = new OneArmedBandit(CREDITS_TO_PLAY);
+        OneArmedBandit cut = new OneArmedBandit(TEN_CREDITS_TO_PLAY);
         cut.setBanditStrategy(WIN_STRATEGY_WITH_APPLE_STATE);
         //when
         GameResult gameResult = cut.pullingHandle();
         //then
         assertThat(gameResult.isGameWon()).isTrue();
         assertThat(gameResult.getCreditsRemained())
-                .isEqualTo(CREDITS_TO_PLAY
+                .isEqualTo(TEN_CREDITS_TO_PLAY
                         .subtract(OneArmedBandit.REGULAR_GAME_PRICE)
                         .addition(Wheel.APPLE.getProfitAsCredit()));
     }
@@ -90,7 +90,7 @@ class OneArmedBanditTest {
         //given
         OneArmedBandit cut = new OneArmedBandit(NOT_ENOUGH_CREDITS_TO_PLAY);
         //when
-        Credit remainingCredits = cut.increaseCredits(CREDITS_TO_PLAY);
+        Credit remainingCredits = cut.increaseCredits(TEN_CREDITS_TO_PLAY);
         //then
         assertThat(new Credit(12)).isEqualTo(remainingCredits);
         assertThat(cut.getCredits()).isEqualTo(remainingCredits);
@@ -102,15 +102,15 @@ class OneArmedBanditTest {
      * apples (10 Credits profit).
      * <p>
      * The Credit calculation in detail:
-     * Step 1 # 10  - 3 =  7  | remaining Credits after pay game cost
-     * Step 2 # 6 / 3   =  2  | rate Risk Factor
-     * Step 3 # 10 * 2  = 20  | Apple profit * rate Risk profit
-     * Step 4 # 7 + 20  = 27  | remaining credits
+     * Step 1 # 10  - 3 = 7   | remaining Credits after pay game cost
+     * Step 2 # 6 + 3 / 3 = 3 | rate Risk Factor
+     * Step 3 # 10 * 2 = 30   | Apple profit * rate Risk profit
+     * Step 4 # 7 + 20 = 37   | remaining credits
      */
     @Test
     void shouldWinAGameWithAbnormalRisk() {
         //given
-        OneArmedBandit cut = new OneArmedBandit(CREDITS_TO_PLAY);
+        OneArmedBandit cut = new OneArmedBandit(TEN_CREDITS_TO_PLAY);
         cut.setBanditStrategy(WIN_STRATEGY_WITH_APPLE_STATE);
         //when
         GameResult gameResult = cut.pullingHandle(new AdditionalInput(6));
@@ -118,7 +118,7 @@ class OneArmedBanditTest {
         assertThat(gameResult.isGameWon()).isTrue();
         assertThat(gameResult.isRiskGame()).isTrue();
         assertThat(gameResult.getCreditsRemained())
-                .isEqualTo(new Credit(27));
+                .isEqualTo(new Credit(37));
     }
 
     /**
@@ -132,7 +132,7 @@ class OneArmedBanditTest {
     @Test
     public void shouldLoseAGameWithAbnormalRisk() {
         //given
-        OneArmedBandit cut = new OneArmedBandit(CREDITS_TO_PLAY);
+        OneArmedBandit cut = new OneArmedBandit(TEN_CREDITS_TO_PLAY);
         cut.setBanditStrategy(getLoseStrategy());
         //when
         GameResult gameResult = cut.pullingHandle(new AdditionalInput(6));
