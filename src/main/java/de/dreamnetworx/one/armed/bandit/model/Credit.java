@@ -2,7 +2,7 @@ package de.dreamnetworx.one.armed.bandit.model;
 
 import java.util.Objects;
 
-public class Credit extends PlayMoneyImpl {
+public class Credit extends PositiveValue {
 
     /**
      * Construct a positive Credit Instance if the given value is negative, CreditException is thrown.
@@ -20,7 +20,7 @@ public class Credit extends PlayMoneyImpl {
      * @param credit
      * @throws CreditException When the given value is negative
      */
-    public Credit(final PlayMoney credit) {
+    public Credit(final PositiveValue credit) {
         super(credit);
     }
 
@@ -31,7 +31,7 @@ public class Credit extends PlayMoneyImpl {
      * @return the credit result
      * @throws CreditException
      */
-    public Credit subtract(final PlayMoney creditsToSubtract) {
+    public Credit subtract(final PositiveValue creditsToSubtract) {
         try {
             return new Credit(value - creditsToSubtract.getValue());
         } catch (CreditException e) {
@@ -53,7 +53,7 @@ public class Credit extends PlayMoneyImpl {
      * @param credit
      * @return
      */
-    public Credit addition(final PlayMoney credit) {
+    public Credit addition(final PositiveValue credit) {
         return new Credit(value + credit.getValue());
     }
 
@@ -63,7 +63,7 @@ public class Credit extends PlayMoneyImpl {
      * @param multipliedBy
      * @return
      */
-    public Credit multiplied(final PlayMoney multipliedBy) {
+    public Credit multiplied(final PositiveValue multipliedBy) {
         return new Credit(value * multipliedBy.getValue());
     }
 

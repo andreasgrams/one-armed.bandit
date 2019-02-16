@@ -78,7 +78,7 @@ class OneArmedBanditTest {
             cut.pullingHandle();
             //then
         } catch (CreditException e) {
-            assertThat(e).hasMessageContaining("Not enough credits to play. One game costs 3 credits.");
+            assertThat(e).hasMessageContaining("Not enough credits to play. This game costs 3 credits.");
         }
     }
 

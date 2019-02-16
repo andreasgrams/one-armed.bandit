@@ -1,6 +1,6 @@
 package de.dreamnetworx.one.armed.bandit.model;
 
-public class AdditionalInput extends PlayMoneyImpl {
+public class AdditionalInput extends PositiveValue {
 
     /**
      * Construct a positive AdditionalInput Instance if the given value is negative, CreditException is thrown.
