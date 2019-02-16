@@ -19,13 +19,15 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\"player\":\"player a\",\n\t\"credit\":\n\t\t{\"value\":10}\n}"
+					"raw": "{\"player\":\"player a\",\n\t\"credit\":\n\t\t{\"credits\":10}\n}"
 				},
 				"url": {
-					"raw": "{{server}}/oneArmedBandit/checkin",
+					"raw": "http://localhost:8080/oneArmedBandit/checkin",
+					"protocol": "http",
 					"host": [
-						"{{server}}"
+						"localhost"
 					],
+					"port": "8080",
 					"path": [
 						"oneArmedBandit",
 						"checkin"
@@ -38,16 +40,25 @@
 			"name": "pullingHandle",
 			"request": {
 				"method": "GET",
-				"header": [],
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"type": "text"
+					}
+				],
 				"body": {
 					"mode": "raw",
 					"raw": ""
 				},
 				"url": {
-					"raw": "{{server}}/oneArmedBandit/pullingHandle",
+					"raw": "http://localhost:8080/oneArmedBandit/pullingHandle",
+					"protocol": "http",
 					"host": [
-						"{{server}}"
+						"localhost"
 					],
+					"port": "8080",
 					"path": [
 						"oneArmedBandit",
 						"pullingHandle"
@@ -66,13 +77,16 @@
 					"raw": ""
 				},
 				"url": {
-					"raw": "{{server}}/oneArmedBandit/pullingHandle",
+					"raw": "http://localhost:8080/oneArmedBandit/pullingHandle/6",
+					"protocol": "http",
 					"host": [
-						"{{server}}"
+						"localhost"
 					],
+					"port": "8080",
 					"path": [
 						"oneArmedBandit",
-						"pullingHandle"
+						"pullingHandle",
+						"6"
 					]
 				}
 			},
@@ -88,7 +102,16 @@
 					"raw": ""
 				},
 				"url": {
-					"raw": ""
+					"raw": "http://localhost:8080/oneArmedBandit/checkout",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"oneArmedBandit",
+						"checkout"
+					]
 				}
 			},
 			"response": []
