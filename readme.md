@@ -19,7 +19,7 @@ Zufall alle drei Symbole übereinstimmen ist das Spiel gewonnen. In diesem Fall 
  - Apfel 10 Kredits
  - Banane 15 Kredits
  - Clementine 20 Kredits
- 
+
 Der Spieler kann seinen Einsatz für ein Spiel erhöhen. Für seine Risikofreude wird er im Gewinnfall mit entsprechend mehr Kredits belohnt. 
 
 **Beispiel**: Der Spieler besitzt 10 Kredits und setzt im folgenden Spiel 6 Kredits zusätzlich ein. Gewinnt er nun mit drei übereinstimmenden Apfel-Symbolen, 
@@ -75,7 +75,7 @@ Der Spieler kann sich am Spielautomaten mit seinem Namen anmelden und die Kredit
 
 #### Response Code
   
-- 200 OK - check in erfolgreich 
+- 200 OK - Check-in erfolgreich 
 - 400 Bad Request - Bei ungültigen Eingaben wie negative Kredits 
 
 ### Das Glück herausfordern 
@@ -102,8 +102,8 @@ Weist der Kontostand des Spielers genügend Kredits auf, kann der Hebel gezogen 
   
 #### Response Code
 
- - 200 OK - check in erfolgreich 
- - 400 Bad Request - Wenn kein CheckIn erfolgte oder Kredits nicht ausreichen
+ - 200 OK - Check-in erfolgreich 
+ - 400 Bad Request - Wenn kein Check-in erfolgte oder Kredits nicht ausreichen
 
 
 ### Das Glück herausfordern mit Risiko Einsatz
@@ -132,8 +132,8 @@ als URL Parameter ein Risiko Spiel starten.
   
 #### Response Code
 
- - 200 OK - check in erfolgreich 
- - 400 Bad Request - Wenn kein CheckIn erfolgte oder Kredits nicht ausreichen
+ - 200 OK - Check-in erfolgreich 
+ - 400 Bad Request - Wenn kein Check-in erfolgte oder Kredits nicht ausreichen
   
 ### Auszahlen 
  
@@ -153,7 +153,7 @@ ausgezahlt.
     
 #### Response Code
     
-- 200 OK - check in erfolgreich 
+- 200 OK - Check-in erfolgreich 
 
 
 ## Test mit Postman
