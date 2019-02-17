@@ -102,10 +102,10 @@ class OneArmedBanditTest {
      * apples (10 Credits profit).
      * <p>
      * The Credit calculation in detail:
-     * Step 1 # 10  - 3 = 7   | remaining Credits after pay game cost
-     * Step 2 # 6 + 3 / 3 = 3 | rate Risk Factor
-     * Step 3 # 10 * 2 = 30   | Apple profit * rate Risk profit
-     * Step 4 # 7 + 20 = 37   | remaining credits
+     * Step 1 # 10 - (3-6) = 1   | remaining Credits after pay game cost and additional Input
+     * Step 2 # 6 + 3 / 3 = 3    | rate Risk Factor
+     * Step 3 # 10 * 3 = 30      | Apple profit * rate Risk profit
+     * Step 4 # 1 + 30 = 31      | remaining credits
      */
     @Test
     void shouldWinAGameWithAbnormalRisk() {
@@ -118,7 +118,7 @@ class OneArmedBanditTest {
         assertThat(gameResult.isGameWon()).isTrue();
         assertThat(gameResult.isRiskGame()).isTrue();
         assertThat(gameResult.getCreditsRemained())
-                .isEqualTo(new Credit(37));
+                .isEqualTo(new Credit(31));
     }
 
     /**

@@ -79,6 +79,7 @@ public class OneArmedBandit {
         if(temporaryGameResult.isGameWon()) {
             final Credit profitByWheel = temporaryGameResult.getFirstWheelProfit();
             if(additionalInput.isPresent()) {
+                newState = newState.subtract(additionalInput.get());
                 Credit rateRisk = getProfitMultiplicator(additionalInput.get());
                 final Credit ratedProfitByWheel = profitByWheel.multiplied(rateRisk);
                 newState = newState.addition(ratedProfitByWheel);
