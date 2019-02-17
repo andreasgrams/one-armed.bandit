@@ -44,9 +44,9 @@ Spring Boot einen kompletten Tomcat Servlet Container bereit um den Zugriff übe
 
 ## Voraussetzung 
 
-Um das one-armed.bandit lokal zu betreiben, ist eine Java 8 Installation notwendig, sowie Apache Maven um den Build Prozess ausführen zu können. 
+Um one-armed.bandit lokal zu betreiben, ist eine Java 8 Installation notwendig, sowie Apache Maven um den Build Prozess ausführen zu können. 
 Das ausführbare jar File erzeugt Maven über den Aufruf `mvn clean install`. Der Port 8080 muss auf dem System frei sein ggf. kann davon 
-abgewichen werden, durch setzen des CommandLine Parameters `-Dserver.port=8181 `
+abgewichen werden, durch setzen des CommandLine Parameters mit z.B. Port 8181 `-Dserver.port=8181 `
 
 ## Starten 
 
@@ -55,8 +55,6 @@ Der one-armed.bandit lässt sich über die Kommandozeile durch folgenden Befehl 
     java -jar one-armed.bandit-1.0.0-SNAPSHOT.jar
 
 ## Spielen
-
-Postman collection ! 
 
 ### Anmelden 
 
@@ -156,3 +154,10 @@ ausgezahlt.
 #### Response Code
     
 - 200 OK - check in erfolgreich 
+
+
+## Test mit Postman
+
+[Postman](https://www.getpostman.com) ist ein REST Client der durch seine einfache Bedienung überzeugt und gut im Team benutzt werden kann. Alle 
+Requests sind in der Postman Collection `one.armed.bandit.postman_collection.json` abgelegt und können einfach 
+importiert und angewendet werden. 
