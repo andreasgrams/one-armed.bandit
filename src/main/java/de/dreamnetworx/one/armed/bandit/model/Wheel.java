@@ -3,7 +3,8 @@ package de.dreamnetworx.one.armed.bandit.model;
 public enum Wheel {
     APPLE(10),
     BANANA(15),
-    CLEMENTINE(20);
+    CLEMENTINE(20),
+    CHEERY(25);
 
     private final int profit;
 

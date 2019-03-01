@@ -5,10 +5,10 @@ import org.slf4j.LoggerFactory;
 
 import java.util.*;
 import java.util.function.IntSupplier;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 public class OneArmedBandit {
+
+    public static final int HOW_MUCH_MOVES = 3;
 
     public static Credit REGULAR_GAME_PRICE = new Credit(3);
 
@@ -120,9 +120,13 @@ public class OneArmedBandit {
      * @return Returns a list of randomized wheels.
      */
     private List<Wheel> getRandomWheelStates(final IntSupplier banditStrategy) {
-        return Stream.of(Wheel.values())
-                .map(c -> getWheel(banditStrategy))
-                .collect(Collectors.toList());
+        int i = 0;
+        List<Wheel> wheels = new ArrayList<>();
+        while (i < HOW_MUCH_MOVES) {
+            wheels.add(getWheel(banditStrategy));
+            i++;
+        }
+        return wheels;
     }
 
     /**
