@@ -19,6 +19,7 @@ Zufall alle drei Symbole übereinstimmen ist das Spiel gewonnen. In diesem Fall 
  - Apfel 10 Kredits
  - Banane 15 Kredits
  - Clementine 20 Kredits
+ - Kirsche 25 Kredits
 
 Der Spieler kann seinen Einsatz für ein Spiel erhöhen. Für seine Risikofreude wird er im Gewinnfall mit entsprechend mehr Kredits belohnt. 
 
