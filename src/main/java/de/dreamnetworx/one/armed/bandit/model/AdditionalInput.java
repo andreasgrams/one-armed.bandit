@@ -3,10 +3,10 @@ package de.dreamnetworx.one.armed.bandit.model;
 public class AdditionalInput extends PositiveValue {
 
     /**
-     * Construct a positive AdditionalInput Instance if the given value is negative, CreditException is thrown.
+     * Construct a positive AdditionalInput Instance if the given value is negative, PositiveValueException is thrown.
      *
      * @param value
-     * @throws CreditException When the given value is negative
+     * @throws PositiveValueException When the given value is negative
      */
     public AdditionalInput(final int value) {
         super(value);

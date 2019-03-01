@@ -7,23 +7,23 @@ public abstract class PositiveValue {
     protected int value;
 
     /**
-     * Construct a positive value Object. If the given value negative, CreditException is thrown.
+     * Construct a positive value Object. If the given value negative, PositiveValueException is thrown.
      *
      * @param value
-     * @throws CreditException When the given value is negative
+     * @throws PositiveValueException When the given value is negative
      */
     public PositiveValue(int value) {
         if(isNegative(value)) {
-            throw new CreditException(String.format("The value must be a positive. Given value: %d", value));
+            throw new PositiveValueException(String.format("The value must be a positive. Given value: %d", value));
         }
         this.value = value;
     }
 
     /**
-     * Construct a positive value Object clone. If the given value negative, CreditException is thrown.
+     * Construct a positive value Object clone. If the given value negative, PositiveValueException is thrown.
      *
      * @param credit
-     * @throws CreditException When the given value is negative
+     * @throws PositiveValueException When the given value is negative
      */
     public PositiveValue(PositiveValue credit) {
         this(credit.getValue());

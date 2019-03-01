@@ -5,43 +5,43 @@ import java.util.Objects;
 public class Credit extends PositiveValue {
 
     /**
-     * Construct a positive Credit Instance if the given value is negative, CreditException is thrown.
+     * Construct a positive Credit Instance if the given value is negative, PositiveValueException is thrown.
      *
      * @param value
-     * @throws CreditException When the given value is negative
+     * @throws PositiveValueException When the given value is negative
      */
     public Credit(final int value) {
         super(value);
     }
 
     /**
-     * Construct a positive Credit when the given value is negative, CreditException is thrown.
+     * Construct a positive Credit when the given value is negative, PositiveValueException is thrown.
      *
      * @param credit
-     * @throws CreditException When the given value is negative
+     * @throws PositiveValueException When the given value is negative
      */
     public Credit(final PositiveValue credit) {
         super(credit);
     }
 
     /**
-     * Subtract the given credits. If the credit value is negative a CreditException is thrown.
+     * Subtract the given credits. If the credit value is negative a PositiveValueException is thrown.
      *
      * @param creditsToSubtract
      * @return the credit result
-     * @throws CreditException
+     * @throws PositiveValueException
      */
     public Credit subtract(final PositiveValue creditsToSubtract) {
         try {
             return new Credit(value - creditsToSubtract.getValue());
-        } catch (CreditException e) {
+        } catch (PositiveValueException e) {
             String hint = "";
             int costs = OneArmedBandit.REGULAR_GAME_PRICE.getValue();
             if(creditsToSubtract instanceof AdditionalInput) {
                 hint = " (with additional input)";
                 costs += creditsToSubtract.getValue();
             }
-            throw new CreditException(String.format(
+            throw new PositiveValueException(String.format(
                     "Not enough credits to play. This game costs %d credits%s. Remaining credits: %d",
                     costs, hint, value));
         }

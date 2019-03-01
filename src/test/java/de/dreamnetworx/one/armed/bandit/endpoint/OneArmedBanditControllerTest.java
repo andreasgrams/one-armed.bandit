@@ -126,7 +126,7 @@ class OneArmedBanditControllerTest {
     @Test
     public void shouldTranslateExceptionOnPullingHandle() throws Exception {
         //given
-        when(service.pullingHandle()).thenThrow(new CreditException("Not enough credits"));
+        when(service.pullingHandle()).thenThrow(new PositiveValueException("Not enough credits"));
         //when
         mockMvc.perform(
                 get(URL_PULLING_HANDLE))
@@ -137,7 +137,7 @@ class OneArmedBanditControllerTest {
     @Test
     public void shouldTranslateExceptionOnCheckout() throws Exception {
         //given
-        when(service.checkout()).thenThrow(new CreditException(""));
+        when(service.checkout()).thenThrow(new PositiveValueException(""));
         //when
         mockMvc.perform(
                 get(URL_CHECKOUT))

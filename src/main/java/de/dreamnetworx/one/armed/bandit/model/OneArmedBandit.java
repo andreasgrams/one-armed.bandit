@@ -31,13 +31,13 @@ public class OneArmedBandit {
      * Start the game by pulling the handel.
      *
      * @return Returns the game result after pulling the handle.
-     * @throws throws a CreditException when not enough credits available for this game.
+     * @throws throws a PositiveValueException when not enough credits available for this game.
      */
-    public GameResult pullingHandle() throws CreditException {
+    public GameResult pullingHandle() throws PositiveValueException {
         return pullingHandle(Optional.empty());
     }
 
-    GameResult pullingHandle(AdditionalInput additionalInput) throws CreditException {
+    GameResult pullingHandle(AdditionalInput additionalInput) throws PositiveValueException {
         return pullingHandle(Optional.ofNullable(additionalInput));
     }
 
@@ -46,9 +46,9 @@ public class OneArmedBandit {
      *
      * @param additionalInput optional risk input for one game.
      * @return Returns the game result after pulling the handle.
-     * @throws throws a CreditException when not enough credits available for this game.
+     * @throws throws a PositiveValueException when not enough credits available for this game.
      */
-    public GameResult pullingHandle(Optional<AdditionalInput> additionalInput) throws CreditException {
+    public GameResult pullingHandle(Optional<AdditionalInput> additionalInput) throws PositiveValueException {
         final TemporaryGameResult temporaryGameResult = buildTempGameResult(this.banditStrategy);
         this.creditState = calculateNewCreditState(this.creditState, temporaryGameResult, additionalInput);
         final GameResult gameResult = new GameResult(this.creditState, temporaryGameResult, additionalInput.isPresent());

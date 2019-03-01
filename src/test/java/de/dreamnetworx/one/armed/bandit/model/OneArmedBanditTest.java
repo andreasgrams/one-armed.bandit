@@ -67,7 +67,7 @@ class OneArmedBanditTest {
     }
 
     /**
-     * Check the game only started when enough credits exists. Expected a CreditException is thrown.
+     * Check the game only started when enough credits exists. Expected a PositiveValueException is thrown.
      */
     @Test
     void shouldNotStartAGameWhenCreditsNotEnough() {
@@ -77,7 +77,7 @@ class OneArmedBanditTest {
         try {
             cut.pullingHandle();
             //then
-        } catch (CreditException e) {
+        } catch (PositiveValueException e) {
             assertThat(e).hasMessageContaining("Not enough credits to play. This game costs 3 credits.");
         }
     }
@@ -145,7 +145,7 @@ class OneArmedBanditTest {
 
     /**
      * Try to play with 4 Credits a game with additional input of 6 credits.
-     * Expected the game ended with a CreditException because minimal 10 Credits required.
+     * Expected the game ended with a PositiveValueException because minimal 10 Credits required.
      */
     @Test
     void shouldPullingHandleWithWithAbnormalRiskAndNotEnoughCredits() {
@@ -155,7 +155,7 @@ class OneArmedBanditTest {
         try {
             cut.pullingHandle(new AdditionalInput(6));
             //then
-        } catch (CreditException e) {
+        } catch (PositiveValueException e) {
             assertThat(e).hasMessageContaining("costs 9 credits (with additional input)");
         }
     }
