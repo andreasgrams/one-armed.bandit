@@ -5,6 +5,7 @@ import org.slf4j.LoggerFactory;
 
 import java.util.*;
 import java.util.function.IntSupplier;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class OneArmedBandit {
@@ -119,10 +120,9 @@ public class OneArmedBandit {
      * @return Returns a list of randomized wheels.
      */
     private List<Wheel> getRandomWheelStates(final IntSupplier banditStrategy) {
-        List<Wheel> result = new ArrayList<>();
-        Stream.of(Wheel.values())
-                .forEach(c -> result.add(getWheel(banditStrategy)));
-        return result;
+        return Stream.of(Wheel.values())
+                .map(c -> getWheel(banditStrategy))
+                .collect(Collectors.toList());
     }
 
     /**
